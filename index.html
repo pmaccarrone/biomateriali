@@ -4730,12 +4730,25 @@ function showIngredientDetail(id) {
         });
         
         if (notes.length > 0) {
-            html += '<div class="formula-notes"><div class="formula-notes-title">Note di processo</div>';
-            html += [...new Set(notes)].map(n => '→ ' + n).join('<br>');
-            html += '</div>';
+            // Filtra note generiche/inutili — mostra solo quelle operative
+            const skipNotes = ['Standard', 'Rinforzo', 'Rinforzo meccanico', 'Rinforzo strutturale',
+                'Coating', 'Coating possibile', 'Blend comuni', 'Combinabili', 'Post-processing',
+                'Miscele colori', 'Mix cariche possibile', 'Variabile', 'Possono combinarsi',
+                'Antiossidante', 'Variabile per reticolante', 'Coating per waterproofing',
+                'Solo chitosano nel database', 'Alginato+carragenina possibile',
+                'Non interazione diretta significativa', 'Non interazione significativa',
+                'Gelatina+agar classico', 'Chitosano come coating', 'Chitosano come coating antimicrobico',
+                'Olio riduce shrinkage', 'Gusci+alginato classico', 'Tinture durante o dopo crescita'];
+            const filteredNotes = [...new Set(notes)].filter(n => 
+                !skipNotes.includes(n) && n.length > 22
+            );
+            if (filteredNotes.length > 0) {
+                html += '<div class="formula-notes"><div class="formula-notes-title">Note di processo</div>';
+                html += filteredNotes.map(n => '→ ' + n).join('<br>');
+                html += '</div>';
+            }
         }
         
-        html += '<div class="disclaimer-inline"><strong>[!] Strumento didattico sperimentale</strong><br>Le formulazioni sono indicative e richiedono verifica pratica in laboratorio. Non sostituisce competenze chimiche.</div>';
         html += '<div class="formula-actions">';
         html += '<button class="btn-save" onclick="saveFormula()">Salva</button>';
         html += '<button class="btn-download" onclick="downloadFormula()">Scarica</button>';
