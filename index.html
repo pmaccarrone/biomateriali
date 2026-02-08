@@ -2364,7 +2364,7 @@
         }
         /* ============================================
            MOBILE RESPONSIVE — v92 mobile patch
-           Solo sotto 768px, desktop invariato
+           Solo sotto 820px, desktop invariato
            ============================================ */
         
         /* FAB button — nascosto su desktop */
@@ -2386,7 +2386,7 @@
             transition: transform 0.2s;
         }
         .cart-fab:active { transform: scale(0.93); }
-        .cart-fab svg { width: 22px; height: 22px; fill: none; stroke: white; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .cart-fab svg { width: 24px; height: 24px; fill: none; stroke: white; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
         .cart-fab .fab-badge {
             position: absolute; top: -4px; right: -4px;
             background: #e65100; color: white; font-size: 0.6rem; font-weight: 700;
@@ -2409,7 +2409,7 @@
             align-items: center; justify-content: center; color: #666;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 820px) {
             /* Layout principale: colonna singola */
             .app-layout { grid-template-columns: 1fr !important; }
             
@@ -10274,7 +10274,7 @@ function showIngredientDetail(id) {
     // ============================================
     
     function mobileIsMobile() {
-        return window.innerWidth <= 768;
+        return window.innerWidth <= 820;
     }
     
     function mobileUpdateFab() {
