@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuratore Didattico Biomateriali v92 - Accademia Albertina</title>
+    <title>Configuratore Didattico Biomateriali v97 - Accademia Albertina</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f4f4; color: #333; min-height: 100vh; font-size: 14px; }
@@ -337,34 +337,24 @@
         
         /* Filtri proprietà  */
         .filters-section {
-            background: white;
-            border-radius: 8px;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            /* v95: contenuto dentro entry-col, no box proprio */
         }
         
         .filters-section h3 {
-            font-size: 0.75rem;
-            color: #1a472a;
-            margin: 0 0 0.6rem 0;
-            padding-bottom: 0.4rem;
-            border-bottom: 1px solid #e8f5e9;
+            display: none; /* v95: h3 è nell'entry-col header */
         }
         
-        /* v76: Filter chips con immagini Leonardo AI */
+        /* v95: Filter chips con immagini Leonardo AI — grid layout */
         .filters-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.4rem;
         }
         
         .filter-chip {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 90px;
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
@@ -372,13 +362,13 @@
         
         .filter-chip .filter-img-wrap {
             position: relative;
-            width: 90px;
-            height: 90px;
-            border-radius: 16px;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
             overflow: hidden;
-            border: 3px solid #e0e0e0;
+            border: 3px solid #c8dcc8;
             transition: all 0.25s ease;
-            background: #f8f9fa;
+            background: #f0f5f0;
         }
         
         .filter-chip .filter-img-wrap img {
@@ -390,7 +380,7 @@
         
         .filter-chip:hover .filter-img-wrap {
             border-color: #2d5a3d;
-            box-shadow: 0 4px 12px rgba(45,90,61,0.2);
+            box-shadow: 0 3px 10px rgba(45,90,61,0.2);
         }
         
         .filter-chip:hover .filter-img-wrap img {
@@ -399,23 +389,22 @@
         
         .filter-chip.active .filter-img-wrap {
             border-color: #2d5a3d;
-            border-width: 3px;
-            box-shadow: 0 4px 16px rgba(45,90,61,0.35);
+            box-shadow: 0 3px 14px rgba(45,90,61,0.35);
         }
         
         .filter-chip .filter-check {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            width: 24px;
-            height: 24px;
+            top: 3px;
+            right: 3px;
+            width: 20px;
+            height: 20px;
             background: #2d5a3d;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 14px;
+            font-size: 11px;
             font-weight: bold;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             z-index: 2;
@@ -426,12 +415,12 @@
         }
         
         .filter-chip .filter-label {
-            margin-top: 0.45rem;
-            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            font-size: 0.6rem;
             color: #666;
             text-align: center;
-            font-weight: 500;
-            line-height: 1.2;
+            font-weight: 600;
+            line-height: 1.15;
             transition: all 0.2s;
         }
         
@@ -644,6 +633,164 @@
             border-top: 1px solid #eee;
         }
         
+        /* v95: Dual-entry layout — due colonne affiancate */
+        .dual-entry {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            align-items: flex-start;
+        }
+        .entry-col {
+            flex: 1;
+            min-width: 0;
+            background: white;
+            border-radius: 8px;
+            padding: 0.6rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .entry-col h3 {
+            font-size: 0.78rem;
+            margin: 0 0 0.5rem 0;
+            padding-bottom: 0.3rem;
+            font-weight: 700;
+        }
+        .entry-col-app h3 { color: #1565c0; border-bottom: 2px solid #e3f2fd; }
+        .entry-col-prop h3 { color: #2d5a3d; border-bottom: 2px solid #e8f5e9; }
+        .entry-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.4rem;
+        }
+        .entry-hint {
+            font-size: 0.65rem;
+            color: #999;
+            text-align: center;
+            margin-top: 0.35rem;
+        }
+        /* v95: App chip con immagine Leonardo AI */
+        .app-chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .app-chip .app-img-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid #d0d8e8;
+            transition: all 0.25s ease;
+            background: #f0f4fa;
+        }
+        .app-chip .app-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.25s ease;
+        }
+        .app-chip:hover .app-img-wrap {
+            border-color: #1565c0;
+            box-shadow: 0 3px 10px rgba(21,101,192,0.2);
+        }
+        .app-chip:hover .app-img-wrap img { transform: scale(1.05); }
+        .app-chip.active .app-img-wrap {
+            border-color: #1565c0;
+            box-shadow: 0 3px 14px rgba(21,101,192,0.35);
+        }
+        .app-chip .app-check {
+            position: absolute;
+            top: 3px; right: 3px;
+            width: 20px; height: 20px;
+            background: #1565c0;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px; font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            z-index: 2;
+        }
+        .app-chip.active .app-check { display: flex; }
+        .app-chip .app-chip-label {
+            margin-top: 0.25rem;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #555;
+            text-align: center;
+            line-height: 1.15;
+            transition: all 0.2s;
+        }
+        .app-chip.active .app-chip-label { color: #1565c0; font-weight: 700; }
+        .app-chip:hover .app-chip-label { color: #1565c0; }
+
+        /* v95: "oppure" divider per mobile */
+        .entry-or {
+            display: none;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.72rem;
+            font-style: italic;
+            padding: 0.15rem 0;
+            position: relative;
+        }
+        .entry-or::before, .entry-or::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 28%;
+            height: 1px;
+            background: #ddd;
+        }
+        .entry-or::before { left: 8%; }
+        .entry-or::after { right: 8%; }
+
+        @media (max-width: 700px) {
+            .dual-entry { flex-direction: column; gap: 0.3rem; }
+            .entry-or { display: block; }
+        }
+        @media (max-width: 400px) {
+            .entry-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* v95: App detail — inside left column */
+        .app-detail {
+            display: none;
+            margin-top: 0.5rem;
+            padding: 0.55rem 0.6rem;
+            background: #f0f7ff;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            font-size: 0.72rem;
+            line-height: 1.45;
+            color: #333;
+            animation: appFadeIn 0.25s ease;
+        }
+        .app-detail.visible { display: block; }
+        @keyframes appFadeIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+        .app-detail-title { font-weight: 700; color: #1565c0; margin-bottom: 0.3rem; font-size: 0.85rem; }
+        .app-detail-desc { margin-bottom: 0.5rem; color: #444; }
+        .app-detail-paths { margin-bottom: 0.5rem; }
+        .app-detail-path {
+            background: #fff; border: 1px solid #c8e6c9; border-radius: 8px;
+            padding: 0.45rem 0.55rem; margin-bottom: 0.35rem;
+        }
+        .app-detail-path-main { }
+        .app-detail-path-name { font-weight: 600; color: #2d5a3d; font-size: 0.73rem; margin-bottom: 0.15rem; }
+        .app-detail-path-note { font-size: 0.67rem; color: #666; font-style: italic; margin-bottom: 0.25rem; }
+        .app-detail-path-ings { display: flex; flex-wrap: wrap; gap: 0.2rem; margin-bottom: 0.25rem; }
+        .app-detail-path-load {
+            padding: 0.25rem 0.45rem; border-radius: 5px; font-size: 0.6rem; font-weight: 700;
+            border: none; cursor: pointer; background: #2d5a3d; color: #fff;
+            transition: all 0.15s; display: inline-block; margin-top: 0.15rem;
+        }
+        .app-detail-path-load:hover { background: #1b3a28; }
+        .app-detail-tradeoff { font-size: 0.7rem; color: #b86800; background: #fff8e1; padding: 0.35rem 0.5rem; border-radius: 6px; margin-top: 0.4rem; border-left: 3px solid #ffc107; }
+
         /* v72: Percorsi consigliati */
         .path-card {
             background: #f8faf8;
@@ -840,7 +987,7 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.08); overflow: hidden;
         }
         .section-header {
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; align-items: center; gap: 0.5rem;
             padding: 0.55rem 0.75rem; border-bottom: 1px solid #eee;
         }
         .section-header.doc-header {
@@ -850,7 +997,7 @@
             background: #fdf8f0; border-left: 3px solid #d4a054;
         }
         .section-title { font-weight: 700; font-size: 0.78rem; color: #333; letter-spacing: 0.02em; }
-        .section-count { font-size: 0.65rem; color: #888; }
+        .section-count { font-size: 0.62rem; color: #666; background: rgba(0,0,0,0.06); padding: 1px 6px; border-radius: 8px; }
         .materiali-list {
             padding: 0.5rem; display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -873,6 +1020,28 @@
         .trl-rosa { background: #f48fb1; }
         .trl-doc { background: #42a5f5; }
         .trl-ind { background: #9e9e9e; }
+        .trl-ing { background: #7e57c2; }
+        .trl-ref { background: #b0bec5; }
+
+        /* v95fix: Collapsible sections */
+        .section-chevron { font-size: 0.7rem; color: #999; transition: transform 0.2s; margin-left: auto; padding-left: 0.5rem; }
+        .section-header.collapsed .section-chevron { transform: rotate(-90deg); }
+        .materiali-section .materiali-list.collapsed { display: none; }
+        .section-header:hover { filter: brightness(0.96); }
+
+        /* v97: 4 tipi entry — A ricetta, B industriale, C ingrediente, D placeholder */
+        .materiale-card.entry-type-B { opacity: 0.5; background: #f5f5f5; }
+        .materiale-card.entry-type-B:hover { opacity: 0.7; }
+        .materiale-card.entry-type-C { background: #f3e5f5; border-left: 3px solid #7e57c2; }
+        .materiale-card.entry-type-C:hover { background: #e8d5f0; }
+        .materiale-card.entry-type-D { opacity: 0.45; background: #fafafa; border-style: dashed; }
+        .materiale-card.entry-type-D:hover { opacity: 0.65; }
+        .entry-badge { font-size: 0.48rem; padding: 1px 5px; border-radius: 3px; vertical-align: middle; margin-left: 4px; font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase; }
+        .badge-ing { background: #e8d5f0; color: #6a1b9a; }
+        .badge-ind { background: #e0e0e0; color: #757575; }
+        .badge-ref { background: #eceff1; color: #78909c; }
+        .mat-btn.ing-link { background: #f3e5f5; color: #7e57c2; font-size: 0.75rem; border: 1px solid #ce93d8; border-radius: 4px; padding: 2px 6px; cursor: pointer; }
+        .mat-btn.ing-link:hover { background: #e1bee7; }
 
         .materiale-info { flex: 1; min-width: 0; }
         .materiale-nome { font-weight: 600; font-size: 0.72rem; color: #333; margin-bottom: 0.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -1443,7 +1612,7 @@
         .result-label { font-size: 0.65rem; text-transform: uppercase; color: #888; margin-bottom: 0.3rem; }
         .result-type { font-size: 1.1rem; font-weight: 600; color: #2d5a3d; }
         .result-base { font-size: 0.8rem; color: #666; margin-top: 0.2rem; }
-        .bar-row { display: flex; align-items: center; margin-bottom: 0.5rem; }
+        .bar-row { display: flex; align-items: center; margin-bottom: 0.5rem; flex-wrap: nowrap; gap: 6px; }
         .bar-label { width: 100px; font-size: 0.75rem; color: #555; }
         .bar-track { flex: 1; height: 10px; background: #e8e8e8; border-radius: 5px; overflow: hidden; }
         .bar-fill { height: 100%; border-radius: 5px; transition: width 0.3s; }
@@ -1666,6 +1835,10 @@
         .td-student-quote { background: #f5f5f5; border-left: 3px solid #90a4ae; padding: 0.4rem 0.6rem; margin-bottom: 0.3rem; border-radius: 0 6px 6px 0; font-size: 0.7rem; font-style: italic; color: #555; }
         .td-student-quote .source { font-style: normal; font-weight: 600; color: #37474f; font-size: 0.6rem; }
         .td-sci-note { background: #e3f2fd; border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.68rem; color: #1565c0; line-height: 1.4; }
+        .td-structural-note { background: #fce4ec; border-left: 3px solid #ad1457; border-radius: 6px; padding: 0.5rem 0.7rem; font-size: 0.72rem; color: #880e4f; line-height: 1.45; margin: 0.4rem 0; font-style: italic; }
+        .td-context-chip.structural { border-color: #e91e63; background: #fce4ec; }
+        .td-context-chip.structural:hover { background: #f8bbd0; border-color: #c2185b; }
+        .td-struct-badge { font-size: 0.55rem; background: #ad1457; color: white; padding: 1px 5px; border-radius: 8px; margin-left: 4px; font-style: italic; }
 
         /* Matrix/checklist */
         .td-matrix-table { width: 100%; border-collapse: collapse; font-size: 0.7rem; margin-top: 0.3rem; table-layout: fixed; word-break: break-word; }
@@ -1900,6 +2073,7 @@
         .formula-total-msg.ok { background: #e8f5e9; color: #2e7d32; border-left: 3px solid #2e7d32; }
         .formula-total-msg.info { background: #e3f2fd; color: #1565c0; border-left: 3px solid #1565c0; }
         .formula-total-msg.warn { background: #fff3e0; color: #e65100; border-left: 3px solid #e65100; }
+        .formula-total-msg.structural { background: #fce4ec; color: #880e4f; border-left: 3px solid #ad1457; font-style: italic; }
         .formula-reset-link { font-size: 0.7rem; color: #999; cursor: pointer; text-decoration: underline; margin-left: 0.5rem; }
         .formula-reset-link:hover { color: #e65100; }
         @keyframes barPulse { 0% { filter: brightness(1); } 50% { filter: brightness(1.4); } 100% { filter: brightness(1); } }
@@ -1938,6 +2112,32 @@
         }
         .disclaimer-inline strong { color: #555; }
         body { padding-bottom: 35px; } /* spazio per footer fisso */
+
+        /* v93: ACCORDION COLLASSABILI */
+        .acc-section { border-radius: 8px; margin-top: 0.6rem; overflow: hidden; }
+        .acc-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; padding: 0.5rem 0.65rem; font-size: 0.8rem; font-weight: 600; user-select: none; transition: background 0.15s; border-radius: 8px; }
+        .acc-header:hover { filter: brightness(0.96); }
+        .acc-chevron { font-size: 0.7rem; transition: transform 0.25s; color: #999; }
+        .acc-section.acc-open > .acc-header .acc-chevron { transform: rotate(90deg); }
+        .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .acc-section.acc-open > .acc-body { max-height: 3000px; transition: max-height 0.4s ease-in; }
+        .acc-body-inner { padding: 0 0.65rem 0.65rem; }
+        /* Accordion varianti colore */
+        .acc-tecnica .acc-header { background: linear-gradient(135deg, #f0f4ff, #e8eef8); color: #37474f; border: 1px solid #c5d5ea; }
+        .acc-formula .acc-header { background: #f0f7f2; color: #2d5a3d; border: 1px solid #c8dcc8; }
+        .acc-annotazioni .acc-header { background: #fafafa; color: #555; border: 1px solid #e0e0e0; }
+        .acc-salvate .acc-header { background: #f5f5f5; color: #555; border: 1px solid #ddd; }
+        .acc-descrizione .acc-header { background: linear-gradient(135deg, #f8f6f0, #f0ece0); color: #5a4a3a; border: 1px solid #d5c9b5; }
+        .acc-section.acc-open .acc-header { border-radius: 8px 8px 0 0; }
+        .acc-tecnica.acc-open .acc-body-inner { background: linear-gradient(135deg, #f7f9ff, #f0f4fb); }
+        .acc-formula.acc-open .acc-body-inner { padding-top: 0.5rem; }
+        .acc-descrizione.acc-open .acc-body { background: linear-gradient(135deg, #f8f6f0 0%, #f0ece0 100%); }
+        .acc-descrizione.acc-open .acc-body-inner { border-left: 3px solid #8b7355; margin-left: 0; }
+        .acc-header .acc-badge { font-size: 0.6rem; padding: 1px 6px; border-radius: 8px; font-weight: 500; margin-left: 6px; }
+
+        /* v93: ETICHETTE QUALITATIVE BARRE */
+        .bar-qual { font-size: 0.6rem; color: #888; min-width: 64px; text-align: right; white-space: nowrap; }
+        @media (max-width: 480px) { .bar-qual { display: none; } }
 
         /* DESCRIZIONE MATERIALE IPOTIZZATO */
         .description-section {
@@ -2498,7 +2698,7 @@
 </style>
 
     <!-- Database esterno -->
-    <script src="data/database_biomateriali_v10_5.js"></script>
+    <script src="data/database_biomateriali_v10_6.js"></script>
 </head>
 <body class="tab-P-active">
     <!-- v77: Welcome onboarding modal -->
@@ -2570,7 +2770,7 @@
                 <h3>Le quattro aree</h3>
                 <p class="guide-tab"><strong>Catalogo</strong> – Materiali che esistono già : documentati dalla letteratura o testati nel lab Albertina. Clicca per vedere ingredienti, proprietà , limiti. Usa il bottone + per caricare gli ingredienti nel carrello.</p>
                 <p class="guide-tab"><strong>Ingredienti</strong> – La dispensa. 63 ingredienti organizzati per famiglia chimica. Ogni scheda dice cosa fa, come si usa, con cosa è compatibile. Filtra per famiglia per orientarti.</p>
-                <p class="guide-tab">⚗️ <strong>Laboratorio</strong> – Il banco di lavoro. Metti gli ingredienti sul tavolo, regola i dosaggi, verifica la compatibilità . Il sistema avvisa se qualcosa non funziona insieme e dice perché.</p>
+                <p class="guide-tab"><strong>Laboratorio</strong> – Il banco di lavoro. Metti gli ingredienti sul tavolo, regola i dosaggi, verifica la compatibilità . Il sistema avvisa se qualcosa non funziona insieme e dice perché.</p>
                 <p class="guide-tab"><strong>Progetto</strong> – Il percorso inverso. Scegli le proprietà  che vuoi ottenere e il sistema propone 2-3 strade possibili con ingredienti e motivazioni. È il punto di partenza consigliato.</p>
 
                 <div class="guide-section">
@@ -2681,9 +2881,10 @@
                     </div>
 
                     <div class="materiali-section">
-                        <div class="section-header doc-header">
+                        <div class="section-header doc-header" onclick="toggleMatSection('doc')" style="cursor:pointer;user-select:none;">
                             <span class="section-title">Documentati</span>
                             <span class="section-count" id="docCount">-</span>
+                            <span class="section-chevron" id="docChevron">▾</span>
                         </div>
                         <div class="materiali-list doc-list" id="materialiDocumentati">
                             <div style="padding:1rem;color:#888;font-size:0.75rem;">Caricamento...</div>
@@ -2691,9 +2892,10 @@
                     </div>
 
                     <div class="materiali-section">
-                        <div class="section-header prog-header">
+                        <div class="section-header prog-header" onclick="toggleMatSection('prog')" style="cursor:pointer;user-select:none;">
                             <span class="section-title">In Progress (Lab Albertina)</span>
                             <span class="section-count" id="progCount">-</span>
+                            <span class="section-chevron" id="progChevron">▾</span>
                         </div>
                         <div class="materiali-list" id="materialiInProgress">
                             <div style="padding:1rem;color:#888;font-size:0.75rem;">Caricamento...</div>
@@ -2704,8 +2906,9 @@
                         <span class="trl-item"><span class="trl-dot trl-verde"></span> Validato</span>
                         <span class="trl-item"><span class="trl-dot trl-bianco"></span> Funziona</span>
                         <span class="trl-item"><span class="trl-dot trl-rosa"></span> Problemi</span>
-                        <span class="trl-item"><span class="trl-dot trl-doc"></span> Replicabile</span>
+                        <span class="trl-item"><span class="trl-dot trl-ing"></span> Ingrediente</span>
                         <span class="trl-item"><span class="trl-dot trl-ind"></span> Industriale</span>
+                        <span class="trl-item"><span class="trl-dot trl-ref"></span> Riferimento</span>
                     </div>
                     </div>
                 </div>
@@ -2719,78 +2922,89 @@
                         </div>
                         
                         <div class="project-scroll-area">
-                        <div class="filters-section">
-                            <h3>Proprieta desiderate</h3>
-                            <div class="filters-grid" id="projectFilters">
-                                <div class="filter-chip" data-filter="trasparente" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/TRASPARENTE.jpg" alt="Trasparente">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Trasparente</span>
-                                </div>
-                                <div class="filter-chip" data-filter="flessibile" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/FLESSIBILE.jpg" alt="Flessibile">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Flessibile</span>
-                                </div>
-                                <div class="filter-chip" data-filter="rigido" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/RIGIDO.jpg" alt="Rigido">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Rigido</span>
-                                </div>
-                                <div class="filter-chip" data-filter="resistente_acqua" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/RESISTENTE_ACQUA.jpg" alt="Resistente acqua">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Resistente<br>all'acqua</span>
-                                </div>
-                                <div class="filter-chip" data-filter="vegano" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/VEGANO.jpg" alt="Vegano">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Vegano</span>
-                                </div>
-                                <div class="filter-chip" data-filter="food_safe" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/FOODSAFE.jpg" alt="Food-safe">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Food-safe</span>
-                                </div>
-                                <div class="filter-chip" data-filter="antibatterico" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/ANTIBATTERICO.jpg" alt="Antibatterico">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Antibatterico</span>
-                                </div>
-                                <div class="filter-chip" data-filter="termostabile" onclick="toggleProjectFilter(this)">
-                                    <div class="filter-img-wrap">
-                                        <img src="data/files/TERMOSTABILE.jpg" alt="Termostabile">
-                                        <span class="filter-check">&#10003;</span>
-                                    </div>
-                                    <span class="filter-label">Termostabile</span>
-                                </div>
 
+                        <!-- v95: DUE PERCORSI PARALLELI -->
+                        <div class="dual-entry">
+                            <div class="entry-col entry-col-app">
+                                <h3>Cosa vuoi realizzare?</h3>
+                                <div class="entry-grid" id="appGrid"></div>
+                                <p class="entry-hint">Percorsi guidati con ingredienti</p>
+                                <!-- v95: detail espande dentro la colonna -->
+                                <div class="app-detail" id="appDetail"></div>
                             </div>
-                            <p class="filters-hint" id="filtersHint">Seleziona almeno una proprieta per vedere i suggerimenti</p>
-                        </div>
-                        
-                        <!-- v73: Trade-offs (prima di tutto) -->
-                        <div id="projectTradeoffs" style="display: none;"></div>
-                        
-                        <!-- v73: Percorsi consigliati (sopra i dettagli) -->
-                        <div id="projectPaths" style="display: none;">
-                            <h3 style="font-size:0.85rem; color:#555; margin: 1rem 0 0.5rem;">Percorsi consigliati</h3>
-                            <p style="font-size:0.75rem; color:#999; margin-bottom:0.5rem;">Combinazioni calcolate in base alle tue esigenze</p>
-                            <div id="pathsContent"></div>
+
+                            <div class="entry-or">oppure</div>
+
+                            <div class="entry-col entry-col-prop">
+                                <h3>Proprietà desiderate</h3>
+                                <div class="filters-section">
+                                <div class="entry-grid filters-grid" id="projectFilters">
+                                    <div class="filter-chip" data-filter="trasparente" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/TRASPARENTE.jpg" alt="Trasparente">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Trasparente</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="flessibile" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/FLESSIBILE.jpg" alt="Flessibile">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Flessibile</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="rigido" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/RIGIDO.jpg" alt="Rigido">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Rigido</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="resistente_acqua" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/RESISTENTE_ACQUA.jpg" alt="Resistente acqua">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Resistente<br>all'acqua</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="vegano" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/VEGANO.jpg" alt="Vegano">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Vegano</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="food_safe" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/FOODSAFE.jpg" alt="Food-safe">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Food-safe</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="antibatterico" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/ANTIBATTERICO.jpg" alt="Antibatterico">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Antibatterico</span>
+                                    </div>
+                                    <div class="filter-chip" data-filter="termostabile" onclick="toggleProjectFilter(this)">
+                                        <div class="filter-img-wrap">
+                                            <img src="data/files/TERMOSTABILE.jpg" alt="Termostabile">
+                                            <span class="filter-check">&#10003;</span>
+                                        </div>
+                                        <span class="filter-label">Termostabile</span>
+                                    </div>
+                                </div>
+                                <p class="entry-hint" id="filtersHint">Filtra per proprietà e vedi materiali</p>
+                                </div>
+                                <!-- v95: tradeoffs e percorsi dentro la colonna destra -->
+                                <div id="projectTradeoffs" style="display: none;"></div>
+                                <div id="projectPaths" style="display: none;">
+                                    <h4 id="pathsHeader" style="font-size:0.78rem; color:#2d5a3d; margin: 0.6rem 0 0.3rem;">Percorsi consigliati</h4>
+                                    <div id="pathsContent"></div>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="results-section" id="projectResults" style="display: none;">
@@ -2904,7 +3118,7 @@
                         </div>
                         
                         <div class="result-panel">
-                            <div class="result-header" id="resultHeader">Materiale Risultante <a href="#descriptionSection" class="section-jump" onclick="event.preventDefault(); document.getElementById('descriptionSection').scrollIntoView({behavior:'smooth', block:'start'});">Descrizione ↓</a></div>
+                            <div class="result-header" id="resultHeader">Materiale Risultante <a href="#" class="section-jump" onclick="event.preventDefault(); if(!document.getElementById('accDescrizione').classList.contains('acc-open')) toggleAccordion('accDescrizione'); setTimeout(function(){document.getElementById('accDescrizione').scrollIntoView({behavior:'smooth', block:'start'});},100);">Descrizione ↓</a></div>
                             <div class="result-body">
                                 <div class="result-section">
                                     <div class="result-label">Tipo previsto</div>
@@ -2914,10 +3128,10 @@
                                 
                                 <div class="result-section">
                                     <div class="result-label">Propriet   stimate</div>
-                                    <div class="bar-row"><span class="bar-label">Trasparenza</span><div class="bar-track"><div class="bar-fill" id="barTrasp" style="width:0%"></div></div></div>
-                                    <div class="bar-row"><span class="bar-label">Flessibilit  </span><div class="bar-track"><div class="bar-fill" id="barFlex" style="width:0%"></div></div></div>
-                                    <div class="bar-row"><span class="bar-label">Resist. H   O</span><div class="bar-track"><div class="bar-fill" id="barH2O" style="width:0%"></div></div></div>
-                                    <div class="bar-row"><span class="bar-label">Resist. mecc.</span><div class="bar-track"><div class="bar-fill" id="barMecc" style="width:0%"></div></div></div>
+                                    <div class="bar-row"><span class="bar-label">Trasparenza</span><div class="bar-track"><div class="bar-fill" id="barTrasp" style="width:0%"></div></div><span class="bar-qual" id="qualTrasp"></span></div>
+                                    <div class="bar-row"><span class="bar-label">Flessibilit  </span><div class="bar-track"><div class="bar-fill" id="barFlex" style="width:0%"></div></div><span class="bar-qual" id="qualFlex"></span></div>
+                                    <div class="bar-row"><span class="bar-label">Resist. H   O</span><div class="bar-track"><div class="bar-fill" id="barH2O" style="width:0%"></div></div><span class="bar-qual" id="qualH2O"></span></div>
+                                    <div class="bar-row"><span class="bar-label">Resist. mecc.</span><div class="bar-track"><div class="bar-fill" id="barMecc" style="width:0%"></div></div><span class="bar-qual" id="qualMecc"></span></div>
                                 </div>
                                 
                                 <div class="result-section">
@@ -2935,9 +3149,15 @@
                                     <div id="suggestionsContent"></div>
                                 </div>
                                 
-                                <!-- v91: SELETTORE TECNICA -->
-                                <div class="tecnica-section" id="tecnicaSection">
-                                    <div class="tecnica-title">Tecnica di lavorazione</div>
+                                <!-- v93: ACCORDION - TECNICA -->
+                                <div class="acc-section acc-tecnica" id="accTecnica">
+                                    <div class="acc-header" onclick="toggleAccordion('accTecnica')">
+                                        <span>Tecnica di lavorazione</span>
+                                        <span class="acc-chevron">&#9654;</span>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                <div class="tecnica-section" id="tecnicaSection" style="margin:0; border:none; background:none; padding:0;">
                                     <div class="tecnica-options">
                                         <button class="tecnica-btn active" data-tecnica="colata" onclick="setTecnica('colata')">Colata</button>
                                         <button class="tecnica-btn" data-tecnica="reticolazione" onclick="setTecnica('reticolazione')">Reticolazione ionica</button>
@@ -2953,37 +3173,66 @@
                                         <span class="coating-hint" id="coatingHint"></span>
                                     </div>
                                 </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <div class="formula-section" id="formulaSection">
-                                    <div class="formula-section-title">Ipotesi di Formula<br><small style="font-weight:normal;color:#888;font-size:0.7rem;">formulazioni variabili da verificare</small></div>
-                                    <div id="formulaContent">
-                                        <div class="formula-empty">Usa le     sul tavolo per selezionare</div>
+                                <!-- v93: ACCORDION - FORMULA -->
+                                <div class="acc-section acc-formula acc-open" id="accFormula">
+                                    <div class="acc-header" onclick="toggleAccordion('accFormula')">
+                                        <span>Ipotesi di Formula <small style="font-weight:normal;color:#888;font-size:0.65rem;">formulazioni variabili da verificare</small></span>
+                                        <span class="acc-chevron">&#9654;</span>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                <div id="formulaContent">
+                                    <div class="formula-empty">Usa le     sul tavolo per selezionare</div>
+                                </div>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <!-- ANNOTAZIONI -->
-                                <div class="annotations-section" id="annotationsSection">
-                                    <div class="annotations-title">Annotazioni personali</div>
-                                    <textarea id="formulaAnnotations" class="annotations-textarea" placeholder="Scrivi qui le tue note sulla formula: osservazioni, varianti da provare, risultati dei test..."></textarea>
-                                </div>
-                                
-                                <!-- FORMULE SALVATE -->
-                                <div class="saved-formulas-section" id="savedFormulasSection">
-                                    <div class="saved-formulas-header">
-                                        <span class="saved-formulas-title">Formule Salvate</span>
-                                        <span class="saved-formulas-count" id="savedCount">0</span>
+                                <!-- v93: ACCORDION - ANNOTAZIONI -->
+                                <div class="acc-section acc-annotazioni" id="accAnnotazioni">
+                                    <div class="acc-header" onclick="toggleAccordion('accAnnotazioni')">
+                                        <span>Annotazioni personali</span>
+                                        <span class="acc-chevron">&#9654;</span>
                                     </div>
-                                    <div class="saved-formulas-list" id="savedFormulasList">
-                                        <div class="saved-empty">Nessuna formula salvata</div>
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                <textarea id="formulaAnnotations" class="annotations-textarea" placeholder="Scrivi qui le tue note sulla formula: osservazioni, varianti da provare, risultati dei test..."></textarea>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <!-- DESCRIZIONE MATERIALE IPOTIZZATO (in fondo per non bloccare la formula) -->
-                                <div class="result-section description-section" id="descriptionSection">
-                                    <div class="description-title">Descrizione Materiale Ipotizzato <a href="#resultHeader" class="section-jump" onclick="event.preventDefault(); this.closest('.result-body').scrollTo({top:0, behavior:'smooth'});">Formulazione ↑</a></div>
-                                    <div class="description-disclaimer">Previsione basata sulle famiglie chimiche, non sulle interazioni specifiche tra ingredienti. Il risultato reale dipende da proporzioni, temperatura e tecnica.</div>
-                                    <div class="description-content" id="descriptionContent">
-                                        <div class="description-empty">Aggiungi ingredienti al tavolo per vedere una descrizione del possibile materiale</div>
+                                <!-- v93: ACCORDION - FORMULE SALVATE -->
+                                <div class="acc-section acc-salvate" id="accSalvate">
+                                    <div class="acc-header" onclick="toggleAccordion('accSalvate')">
+                                        <span>Formule Salvate <span class="acc-badge" style="background:#aaa;color:#fff;" id="savedCount">0</span></span>
+                                        <span class="acc-chevron">&#9654;</span>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                <div class="saved-formulas-list" id="savedFormulasList">
+                                    <div class="saved-empty">Nessuna formula salvata</div>
+                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- v93: ACCORDION - DESCRIZIONE MATERIALE -->
+                                <div class="acc-section acc-descrizione" id="accDescrizione">
+                                    <div class="acc-header" onclick="toggleAccordion('accDescrizione')">
+                                        <span>Descrizione Materiale Ipotizzato</span>
+                                        <span class="acc-chevron">&#9654;</span>
+                                    </div>
+                                    <div class="acc-body">
+                                        <div class="acc-body-inner">
+                                <div class="description-disclaimer">Previsione basata sulle famiglie chimiche, non sulle interazioni specifiche tra ingredienti. Il risultato reale dipende da proporzioni, temperatura e tecnica.</div>
+                                <div class="description-content" id="descriptionContent">
+                                    <div class="description-empty">Aggiungi ingredienti al tavolo per vedere una descrizione del possibile materiale</div>
+                                </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -3239,7 +3488,7 @@
                 </div>
                 
                 <div class="credits-version">
-                    Configuratore Biomateriali v92 – Database v10.1
+                    Configuratore Biomateriali v97 – Database v10.6
                 </div>
             </div>
         </div>
@@ -3257,7 +3506,7 @@
     // ============================================
 // DATI CARICATI DA FILE ESTERNO
 // ============================================
-// I dati sono in: data/database_biomateriali_v10_5.js
+// I dati sono in: data/database_biomateriali_v10_6.js
 // Contiene: CATALOGO_DATA, MATERIALI_DATA, INGREDIENTI_DATA, 
 //           OUTPUT_INFO, IN_PROGRESS_MAPPING
 // ============================================
@@ -4350,7 +4599,7 @@ function showIngredientDetail(id) {
         
         // FOOTER
         t += nl + line + nl;
-        t += 'Configuratore Biomateriali v92 – Accademia Albertina' + nl;
+        t += 'Configuratore Biomateriali v97 – Accademia Albertina' + nl;
         t += 'Scheda generata il ' + new Date().toLocaleDateString('it-IT') + nl;
         t += line + nl;
         
@@ -4422,7 +4671,7 @@ function showIngredientDetail(id) {
         // --- HEADER ---
         var allText = bigLine + nl;
         allText += (famigliaKey ? 'FAMIGLIA: ' : '') + exportTitle + nl;
-        allText += 'Configuratore Biomateriali v92 – Accademia Albertina' + nl;
+        allText += 'Configuratore Biomateriali v97 – Accademia Albertina' + nl;
         allText += 'Generato il ' + new Date().toLocaleDateString('it-IT') + ' – ' + ids.length + ' ingredienti' + nl;
         allText += bigLine + nl;
         
@@ -4610,7 +4859,7 @@ function showIngredientDetail(id) {
                 refHtml += '<div style="color:#78909c;font-size:0.67rem;">' + dettagli.join(' · ') + '</div>';
             }
             if (ref.problemi && ref.problemi !== 'Nessuna.' && ref.problemi !== '') {
-                refHtml += '<div style="color:#c62828;font-size:0.67rem;margin-top:0.2rem;">⚠ ' + ref.problemi + '</div>';
+                refHtml += '<div style="color:#c62828;font-size:0.67rem;margin-top:0.2rem;">' + ref.problemi + '</div>';
             }
             refHtml += '</div>';
             refBox.innerHTML = refHtml;
@@ -5027,14 +5276,75 @@ function showIngredientDetail(id) {
         
         // Analisi composizione
         let plastPct = 0, matricePct = 0, reticPct = 0, lipidePct = 0, caricaPct = 0;
+        let hasFamilies = {};
+        let hasIngredients = {};
         formula.forEach(f => {
             const fam = f.ing.famiglia;
+            hasFamilies[fam] = true;
+            var nLow = (f.ing.nome || '').toLowerCase();
+            if (nLow.indexOf('gelatina') !== -1) hasIngredients._gelatina = true;
+            if (nLow.indexOf('caseina') !== -1) hasIngredients._caseina = true;
+            if (nLow.indexOf('agar') !== -1) hasIngredients._agar = true;
+            if (nLow.indexOf('alginato') !== -1) hasIngredients._alginato = true;
+            if (nLow.indexOf('chitosano') !== -1) hasIngredients._chitosano = true;
             if (fam === 'PLASTIFICANTE') plastPct += f.percent;
             else if (['PROTEINA','POLISACCARIDE_NEUTRO','POLISACCARIDE_ANIONICO','POLICATIONE','COLTURA'].includes(fam)) matricePct += f.percent;
             else if (fam === 'SALE_RETICOLANTE') reticPct += f.percent;
             else if (fam === 'LIPIDE') lipidePct += f.percent;
             else if (fam === 'CARICA') caricaPct += f.percent;
         });
+        
+        var hasMatrice = hasFamilies.PROTEINA || hasFamilies.POLISACCARIDE_NEUTRO || hasFamilies.POLISACCARIDE_ANIONICO || hasFamilies.POLICATIONE || hasFamilies.COLTURA;
+        var hasPlast = hasFamilies.PLASTIFICANTE;
+        var hasLipide = hasFamilies.LIPIDE;
+        var hasRetic = hasFamilies.SALE_RETICOLANTE;
+        var hasCarica = hasFamilies.CARICA;
+        var hasColorante = hasFamilies.COLORANTE;
+        var hasEmuls = hasFamilies.EMULSIONANTE;
+        
+        // ==========================================
+        // VINCOLI CHIMICI E STRUTTURALI
+        // ==========================================
+        
+        if (hasMatrice && !hasLipide && !hasRetic && !hasFamilies.COLTURA) {
+            if (hasPlast) {
+                msgs.push({ type: 'structural', text: 'Sensibilit\u00e0 all\'acqua intrinseca. Matrice idrofila + plastificante: solubile in acqua per natura chimica. I biopolimeri formano legami H con l\'acqua, i plastificanti (glicerina, sorbitolo) sono igroscopici. Non \u00e8 un problema di dosaggio. Per migliorare: aggiungere lipide come coating esterno, o reticolante per stabilizzare la rete.' });
+            } else {
+                msgs.push({ type: 'structural', text: 'Sensibilit\u00e0 all\'acqua. Le matrici biopolimeriche sono intrinsecamente idrofile \u2014 si gonfiano o dissolvono a contatto con acqua. Per impermeabilizzare servono lipidi (coating) o reticolazione (CaCl\u2082 per alginato, tannini per proteine).' });
+            }
+        }
+        
+        if (hasIngredients._gelatina && hasPlast && !hasRetic) {
+            msgs.push({ type: 'structural', text: 'Termolabilit\u00e0 della gelatina. Fonde a 25-30\u00b0C, e il plastificante abbassa ulteriormente la Tg. Questo materiale si ammorbidisce al sole o in estate. Limite chimico: per stabilizzare servono tannini o altri reticolanti (che per\u00f2 scuriscono il materiale).' });
+        }
+        
+        if (hasIngredients._caseina && !hasRetic && hasPlast) {
+            msgs.push({ type: 'structural', text: 'Caseina senza reticolante. La caseina plastificata resta fragile e sensibile all\'umidit\u00e0. Storicamente (Galalite, 1897) diventa "plastica" solo con reticolazione (formalina, borace, allume) che blocca le catene e rende il materiale rigido e idrorepellente.' });
+        }
+        
+        if (hasCarica) {
+            msgs.push({ type: 'structural', text: 'Opacit\u00e0 da cariche. Le particelle solide (fibre, gusci, polveri) diffondono la luce \u2014 il materiale sar\u00e0 opaco indipendentemente dal dosaggio. Fenomeno fisico (scattering). Trasparenza e cariche sono incompatibili.' });
+        }
+        
+        if (hasLipide && hasMatrice && !hasEmuls) {
+            msgs.push({ type: 'structural', text: 'Lipide in matrice acquosa senza emulsionante. Acqua e grassi/cere sono immiscibili: il lipide former\u00e0 gocce o strati separati, producendo torbidit\u00e0. Per un coating funzionale: applicare il lipide come strato esterno. Per una miscela: aggiungere un emulsionante (lecitina).' });
+        }
+        
+        if (hasIngredients._alginato && !hasRetic) {
+            msgs.push({ type: 'structural', text: 'Alginato senza reticolante. L\'alginato in acqua d\u00e0 una soluzione viscosa, non un gel. Per gelificare serve un bagno in CaCl\u2082 (ioni Ca\u00b2\u207a creano legami ionici tra le catene). Senza CaCl\u2082 non si ottiene un materiale solido.' });
+        }
+        
+        if (hasIngredients._agar && hasPlast) {
+            msgs.push({ type: 'info', text: 'Agar + plastificante: l\'agar forma gel rigidi e fragili per natura (isteresi termica: gelifica a 35\u00b0C, fonde a 85\u00b0C). Il plastificante aiuta ma non lo trasforma in un materiale flessibile come la gelatina. Per flessibilit\u00e0 vera, considerare blend agar+gelatina.' });
+        }
+        
+        if (hasIngredients._chitosano && !hasPlast) {
+            msgs.push({ type: 'info', text: 'Chitosano puro. Forma film rigidi, parzialmente idrofobi e antimicrobici. Non richiede plastificante per essere funzionale ma sar\u00e0 poco flessibile. Per flessibilit\u00e0 aggiungere glicerina 15-25%.' });
+        }
+        
+        // ==========================================
+        // MESSAGGI SU DOSAGGIO
+        // ==========================================
         
         // Messaggi su totale – spiega in termini di grammi da pesare
         if (total !== 100 && total >= 95 && total <= 105) {
@@ -5199,6 +5509,7 @@ function showIngredientDetail(id) {
         if (!listEl) return;
         
         countEl.textContent = saved.length;
+        countEl.style.background = saved.length > 0 ? '#4caf50' : '#aaa';
         
         if (saved.length === 0) {
             listEl.innerHTML = '<div class="saved-empty">Nessuna formula salvata</div>';
@@ -5650,7 +5961,7 @@ function showIngredientDetail(id) {
         
         // Footer
         text += line + nl;
-        text += 'Configuratore Biomateriali v92 - Accademia Albertina' + nl;
+        text += 'Configuratore Biomateriali v97 - Accademia Albertina' + nl;
         text += 'Formula sperimentale - verificare sempre in laboratorio' + nl;
         text += line + nl;
         
@@ -5951,12 +6262,47 @@ function showIngredientDetail(id) {
         generateMaterialDescription(selected, matrice, plastificante, lipide, trasparenza, flessibilita, resistH2O, resistMecc, allVegano, allFoodSafe, limits);
     }
     
+    // v93: QUALITATIVE BAR LABELS
+    var BAR_QUAL_LABELS = {
+        barTrasp: [
+            [0, 'Opaco'], [16, 'Traslucido basso'], [36, 'Traslucido'], [56, 'Semi-trasparente'], [76, 'Trasparente']
+        ],
+        barFlex: [
+            [0, 'Rigido'], [16, 'Semi-rigido'], [36, 'Moderato'], [56, 'Flessibile'], [76, 'Molto flessibile']
+        ],
+        barH2O: [
+            [0, 'Nulla'], [16, 'Scarsa'], [36, 'Moderata'], [56, 'Buona'], [76, 'Alta']
+        ],
+        barMecc: [
+            [0, 'Molto fragile'], [16, 'Fragile'], [36, 'Moderata'], [56, 'Resistente'], [76, 'Molto resistente']
+        ]
+    };
+    function getBarQualLabel(id, value) {
+        var labels = BAR_QUAL_LABELS[id];
+        if (!labels) return '';
+        var label = labels[0][1];
+        for (var i = 0; i < labels.length; i++) {
+            if (value >= labels[i][0]) label = labels[i][1];
+        }
+        return label;
+    }
+
     function updateBar(id, value) {
         const bar = document.getElementById(id);
         if (!bar) return;
         const v = Math.min(100, Math.max(0, value));
         bar.style.width = v + '%';
         bar.className = 'bar-fill ' + (v > 60 ? 'high' : v > 30 ? 'medium' : 'low');
+        // v93: update qualitative label
+        var qualEl = document.getElementById('qual' + id.replace('bar', ''));
+        if (qualEl) qualEl.textContent = v > 0 ? getBarQualLabel(id, v) : '';
+    }
+
+    // v93: ACCORDION TOGGLE
+    function toggleAccordion(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.classList.toggle('acc-open');
     }
     
     // ===============================================
@@ -6326,6 +6672,14 @@ function showIngredientDetail(id) {
         // === MATERIALI SIMILI TESTATI ===
         if (materialiDB) {
             let simili = [];
+            // v98: Famiglie matrice — overlap significativo solo se condivide almeno una matrice
+            const MATRICE_FAMIGLIE = ['PROTEINA','POLISACCARIDE_NEUTRO','POLISACCARIDE_ANIONICO','POLICATIONE','COLTURA'];
+            function hasMatriceOverlap(overlapIds) {
+                return overlapIds.some(id => {
+                    const ing = ings[id];
+                    return ing && MATRICE_FAMIGLIE.includes(ing.famiglia);
+                });
+            }
             // Scan in_progress
             (materialiDB.materiali_in_progress || []).forEach(mat => {
                 const matIngs = mat.ingredienti_correlati || [];
@@ -6333,7 +6687,9 @@ function showIngredientDetail(id) {
                 const matNoAcqua = matIngs.filter(id => id !== 'acqua');
                 const overlap = userNoAcqua.filter(id => matNoAcqua.includes(id));
                 const unionSize = new Set([...userNoAcqua, ...matNoAcqua]).size;
-                if (overlap.length >= 2 || (overlap.length >= 1 && matNoAcqua.length <= 2 && userNoAcqua.length <= 3)) {
+                // v98: Richiedi almeno 1 matrice in overlap, oppure overlap>=3 (molti ingredienti comuni)
+                const matriceInComune = hasMatriceOverlap(overlap);
+                if ((overlap.length >= 2 && matriceInComune) || overlap.length >= 3 || (overlap.length >= 1 && matNoAcqua.length <= 2 && userNoAcqua.length <= 3 && matriceInComune)) {
                     simili.push({
                         nome: mat.nome,
                         tipo: 'lab',
@@ -6360,6 +6716,9 @@ function showIngredientDetail(id) {
                 const overlap = userNoAcqua.filter(id => matNoAcqua.includes(id));
                 const unionSize = new Set([...userNoAcqua, ...matNoAcqua]).size;
                 if (overlap.length >= 2) {
+                    // v98: stessa logica — richiedi matrice in overlap o overlap>=3
+                    const matriceInComune = hasMatriceOverlap(overlap);
+                    if (!matriceInComune && overlap.length < 3) return;
                     simili.push({
                         nome: mat.nome || mat.subtitle || mat.name || '',
                         tipo: 'doc',
@@ -6397,7 +6756,10 @@ function showIngredientDetail(id) {
                         if (m.test_acqua) tests.push('Acqua: ' + m.test_acqua.toLowerCase());
                         if (m.test_calore) tests.push('Calore: ' + m.test_calore.toLowerCase());
                         if (tests.length > 0) html += '<div class="desc-match-tests">' + tests.join(' · ') + '</div>';
-                        if (m.problemi) html += '<div class="desc-match-warn">[!] ' + m.problemi + '</div>';
+                        if (m.problemi) {
+                            const probTrunc = m.problemi.length > 150 ? m.problemi.substring(0, 150).replace(/\s+\S*$/, '') + '...' : m.problemi;
+                            html += '<div class="desc-match-warn">[!] ' + probTrunc + '</div>';
+                        }
                     }
                     html += '</div>';
                 });
@@ -6849,13 +7211,14 @@ function showIngredientDetail(id) {
             loadCartFromStorage();
             loadSavedFormulas();
             mobileUpdateFab();
+            initAppGrid(); // v93: percorsi applicazione
             
             // v78: Mostra welcome modal al primo caricamento
             setTimeout(showWelcome, 300);
         } else {
-            console.error('data.js non caricato. Verificare che il file esista in data/database_biomateriali_v10_5.js');
+            console.error('data.js non caricato. Verificare che il file esista in data/database_biomateriali_v10_6.js');
             document.getElementById('materialiDocumentati').innerHTML = 
-                '<div style="padding:1rem;color:#c00;font-size:0.75rem;">Errore: data.js non trovato.<br>Verificare che esista data/database_biomateriali_v10_5.js</div>';
+                '<div style="padding:1rem;color:#c00;font-size:0.75rem;">Errore: data.js non trovato.<br>Verificare che esista data/database_biomateriali_v10_6.js</div>';
         }
     }
 
@@ -6879,7 +7242,7 @@ function showIngredientDetail(id) {
         document.querySelectorAll('.output-btn').forEach(btn => {
             const outputType = btn.dataset.output;
             const catData = catOutputs[outputType];
-            const docCount = catData?.n_documentati || 0;
+            let docCount = catData?.n_documentati || 0;
             const progCount = (materialiDB.materiali_in_progress || []).filter(m => 
                 getInProgressOutput(m) === outputType
             ).length;
@@ -6892,6 +7255,15 @@ function showIngredientDetail(id) {
     //                                                                                                                                                                                  
     // SELEZIONE OUTPUT
     //                                                                                                                                                                                  
+    // v95fix: Toggle collapsible sections in Catalogo
+    function toggleMatSection(which) {
+        var header = document.querySelector(which === 'doc' ? '.doc-header' : '.prog-header');
+        var list = document.getElementById(which === 'doc' ? 'materialiDocumentati' : 'materialiInProgress');
+        if (!header || !list) return;
+        header.classList.toggle('collapsed');
+        list.classList.toggle('collapsed');
+    }
+
     function toggleOutput(output) {
         const btn = document.querySelector(`.output-btn[data-output="${output}"]`);
         const wasActive = btn.classList.contains('active');
@@ -6950,31 +7322,66 @@ function showIngredientDetail(id) {
     }
 
     function showAllMateriali() {
-        // Mostra tutti i documentati replicabili
+        // Mostra tutti i documentati da MATERIALI_DATA (sono tutti ricette vere)
         const docContainer = document.getElementById('materialiDocumentati');
         const replicabili = materialiDB.materiali_documentati.filter(m => m.replicabile_lab);
         
         let docHtml = '';
         replicabili.forEach(mat => {
             const ingredienti = resolveIngNames(mat.ingredienti_correlati);
-            // Usa TRL per colore: 8-9 verde, 6-7 bianco, <6 rosa
-            const trlClass = mat.trl >= 8 ? 'trl-verde' : (mat.trl >= 6 ? 'trl-bianco' : 'trl-rosa');
-            docHtml += createMaterialeCard(mat.name, ingredienti, trlClass, true, 'doc', null, mat.trl);
+            docHtml += createMaterialeCard(mat.name, ingredienti, mat.trl, 'doc', null, 'A');
         });
         docContainer.innerHTML = docHtml || '<div style="padding:0.75rem;color:#888;font-size:0.72rem;">Nessun materiale</div>';
-        document.getElementById('docCount').textContent = replicabili.length + ' replicabili';
+        document.getElementById('docCount').textContent = replicabili.length + ' ricette';
         
         // Mostra tutti in progress
         const progContainer = document.getElementById('materialiInProgress');
         let progHtml = '';
         materialiDB.materiali_in_progress.forEach(m => {
-            const trlClass = m.trl === 3 ? 'trl-verde' : (m.trl === 2 ? 'trl-bianco' : 'trl-rosa');
             const nome = m.ricetta_origine + ': ' + (m.nome || '').substring(0, 25);
             const desc = m.ingredienti_descrizione || m.consistenza || '-';
-            progHtml += createMaterialeCard(m.ricetta_origine, desc, trlClass, false, 'prog', nome, m.trl);
+            progHtml += createMaterialeCard(m.ricetta_origine, desc, m.trl, 'prog', nome, 'A');
         });
         progContainer.innerHTML = progHtml || '<div style="padding:0.75rem;color:#888;font-size:0.72rem;">Nessun test</div>';
         document.getElementById('progCount').textContent = materialiDB.materiali_in_progress.length;
+    }
+
+    // v96: CLASSIFICAZIONE ENTRIES CATALOGO
+    // Tipo A = Ricetta (default) — ingredienti specifici, processo, bottone "+"
+    // Tipo B = Industriale — replicabile:false, solo cultura, rilevato automaticamente
+    // Tipo C = Ingrediente-come-materiale — rimanda alla scheda ingrediente
+    // Tipo D = Composito-placeholder — riferimento enciclopedico
+
+    const ENTRY_TYPE_C = {  // nome → ingrediente_id (null = alternative multiple)
+        'Chitina': 'chitosano',
+        'Collagene': 'gelatina',
+        'Cheratina': 'cheratina',
+        'Cheratina da capelli': 'cheratina',
+        'Micelio': 'micelio',
+        'Lana/Wool': 'cheratina',
+        'SCOBY': 'scoby',
+        'Cellulosa': 'cellulosa_carta',
+        'Coating batterici': 'scoby',
+        'Bacterial cellulose comp': 'scoby',
+        'Alghe biopolimeri': null,
+        'Resine naturali': null
+    };
+
+    const ENTRY_TYPE_D = new Set([
+        'Wood-plastic composites', 'Algae composites', 'Coffee waste composites',
+        'Orange peel composites', 'Grape marc composites', 'Flax composites',
+        'Bagasse (canna) composites', 'Rice husk composites',
+        'Sisal composites', 'Coir (cocco) composites', 'Bamboo composites',
+        'Kenaf composites', 'Cork composites', 'Canapa fibre', 'Lino fibre',
+        'Hemp automotive', 'Canapa+PP', 'Basalto+Bio-resina', 'Flax+PLA', 'Juta+PLA'
+    ]);
+
+    // Rileva tipo entry: 'A' ricetta, 'B' industriale, 'C' ingrediente, 'D' placeholder
+    function getEntryType(nome, isReplicabile) {
+        if (ENTRY_TYPE_C.hasOwnProperty(nome)) return 'C';
+        if (ENTRY_TYPE_D.has(nome)) return 'D';
+        if (!isReplicabile) return 'B';
+        return 'A';
     }
 
     // v77: Usa CATALOGO_DATA per lista materiali, cross-ref con MATERIALI_DATA per dettagli
@@ -6984,16 +7391,10 @@ function showIngredientDetail(id) {
         const outputData = catalogo?.outputs?.[outputType];
         const catDocs = outputData?.documentati || [];
         
-        // v80: Filtra materie prime industriali (replicabile=false + nessun ingrediente)
-        const catDocsFiltered = catDocs.filter(catMat => {
-            if (catMat.replicabile === false && (!catMat.ingredienti || catMat.ingredienti.length === 0)) return false;
-            return true;
-        });
-        
         let docHtml = '';
-        let docReplicabili = 0;
+        let counts = { A: 0, B: 0, C: 0, D: 0 };
         
-        catDocsFiltered.forEach(catMat => {
+        catDocs.forEach(catMat => {
             const fullMat = (materialiDB.materiali_documentati || []).find(m => 
                 m.name === catMat.nome || m.name === catMat.name
             );
@@ -7003,13 +7404,17 @@ function showIngredientDetail(id) {
             const nome = fullMat?.name || catMat.nome || catMat.name;
             const ingredienti = fullMat ? resolveIngNames(fullMat.ingredienti_correlati) : resolveIngNames(catMat.ingredienti);
             
-            if (isReplicabile) docReplicabili++;
-            const trlClass = !isReplicabile ? 'trl-ind' : (trl >= 8 ? 'trl-verde' : (trl >= 6 ? 'trl-bianco' : 'trl-rosa'));
-            docHtml += createMaterialeCard(nome, ingredienti, trlClass, isReplicabile, 'doc', null, trl);
+            const eType = getEntryType(nome, isReplicabile);
+            counts[eType]++;
+            
+            docHtml += createMaterialeCard(nome, ingredienti, trl, 'doc', null, eType);
         });
         
         docContainer.innerHTML = docHtml || '<div style="padding:0.75rem;color:#888;font-size:0.72rem;">Nessun materiale per questo output</div>';
-        document.getElementById('docCount').textContent = docReplicabili + ' replicabili / ' + catDocsFiltered.length + ' totali';
+        var countText = counts.A + ' ricette';
+        if (counts.C > 0) countText += ' · ' + counts.C + ' ingredienti';
+        if (counts.B + counts.D > 0) countText += ' · ' + (counts.B + counts.D) + ' riferimenti';
+        document.getElementById('docCount').textContent = countText;
         
         // IN PROGRESS - filtra per categoria_menu
         const progContainer = document.getElementById('materialiInProgress');
@@ -7031,32 +7436,77 @@ function showIngredientDetail(id) {
         
         let progHtml = '';
         progFiltered.forEach(m => {
-            const trlClass = m.trl === 3 ? 'trl-verde' : (m.trl === 2 ? 'trl-bianco' : 'trl-rosa');
             const nome = m.ricetta_origine + ': ' + (m.nome || '').substring(0, 25);
             const desc = m.ingredienti_descrizione || m.consistenza || '-';
-            progHtml += createMaterialeCard(m.ricetta_origine, desc, trlClass, false, 'prog', nome, m.trl);
+            progHtml += createMaterialeCard(m.ricetta_origine, desc, m.trl, 'prog', nome, 'A');
         });
         
         progContainer.innerHTML = progHtml || '<div style="padding:0.75rem;color:#888;font-size:0.72rem;">Nessun test per questo output</div>';
         document.getElementById('progCount').textContent = progFiltered.length;
     }
 
-    function createMaterialeCard(id, ingredienti, trlClass, canUse, tipo, displayName, trl) {
+    // v97: createMaterialeCard con 4 tipi visivi
+    // eType: 'A' ricetta, 'B' industriale, 'C' ingrediente-materiale, 'D' placeholder
+    function createMaterialeCard(id, ingredienti, trl, tipo, displayName, eType) {
         const nome = displayName || id;
-        // v79: Badge differenziato doc vs prog
+        const eid = id.replace(/'/g, "\\'");
+        eType = eType || 'A';
+        
+        // TRL dot color
+        const trlDotClass = eType === 'B' ? 'trl-ind' : eType === 'C' ? 'trl-ing' : eType === 'D' ? 'trl-ref' :
+            (trl >= 8 ? 'trl-verde' : (trl >= 6 ? 'trl-bianco' : 'trl-rosa'));
+
+        // === TYPE C: Ingrediente-come-materiale ===
+        if (eType === 'C') {
+            const ingId = ENTRY_TYPE_C[id];
+            const linkBtn = ingId 
+                ? '<button class="mat-btn ing-link" onclick="event.stopPropagation(); switchTab(\'B\'); setTimeout(function(){ showIngredientDetail(\'' + ingId + '\'); }, 150);" title="Vedi scheda ingrediente">🔍</button>'
+                : '';
+            return '<div class="materiale-card entry-type-C" onclick="showDetail(\'' + eid + '\', \'' + tipo + '\')">' +
+                '<span class="trl-dot trl-ing"></span>' +
+                '<div class="materiale-info">' +
+                    '<div class="materiale-nome">' + nome + ' <span class="entry-badge badge-ing">INGREDIENTE</span></div>' +
+                    '<div class="materiale-ingredienti">' + ingredienti + '</div>' +
+                '</div>' +
+                '<div class="materiale-actions">' + linkBtn + '</div>' +
+            '</div>';
+        }
+
+        // === TYPE D: Composito-placeholder ===
+        if (eType === 'D') {
+            return '<div class="materiale-card entry-type-D" onclick="showDetail(\'' + eid + '\', \'' + tipo + '\')">' +
+                '<span class="trl-dot trl-ref"></span>' +
+                '<div class="materiale-info">' +
+                    '<div class="materiale-nome">' + nome + ' <span class="entry-badge badge-ref">RIFERIMENTO</span></div>' +
+                    '<div class="materiale-ingredienti">' + ingredienti + '</div>' +
+                '</div>' +
+            '</div>';
+        }
+
+        // === TYPE B: Industriale ===
+        if (eType === 'B') {
+            return '<div class="materiale-card entry-type-B" onclick="showDetail(\'' + eid + '\', \'' + tipo + '\')">' +
+                '<span class="trl-dot trl-ind"></span>' +
+                '<div class="materiale-info">' +
+                    '<div class="materiale-nome">' + nome + ' <span class="entry-badge badge-ind">INDUSTRIALE</span></div>' +
+                    '<div class="materiale-ingredienti">' + ingredienti + '</div>' +
+                '</div>' +
+            '</div>';
+        }
+        
+        // === TYPE A: Ricetta (default) ===
         var trlBadge = '';
         if (tipo === 'prog') {
             trlBadge = trl ? '<span class="trl-badge">' + (trl === 3 ? 'OK' : (trl === 2 ? '?' : '!')) + '</span>' : '';
         } else if (trl) {
-            // Documented: mostra numero TRL piccolo
             trlBadge = '<span class="trl-badge" style="font-size:0.55rem;min-width:auto;padding:1px 4px;background:' + 
                 (trl >= 8 ? '#e8f5e9;color:#2e7d32' : (trl >= 6 ? '#e3f2fd;color:#1565c0' : '#fff3e0;color:#e65100')) + 
                 ';">TRL ' + trl + '</span>';
         }
-        const useBtn = canUse ? '<button class="mat-btn usa" onclick="event.stopPropagation(); usaMateriale(\'' + id.replace(/'/g, "\\'") + '\', \'' + tipo + '\')" title="Usa ingredienti">+</button>' : '';
+        const useBtn = '<button class="mat-btn usa" onclick="event.stopPropagation(); usaMateriale(\'' + eid + '\', \'' + tipo + '\')" title="Usa ingredienti">+</button>';
         
-        return '<div class="materiale-card ' + (trlClass === 'trl-ind' ? 'industriale' : '') + '" onclick="showDetail(\'' + id.replace(/'/g, "\\'") + '\', \'' + tipo + '\')">' +
-            '<span class="trl-dot ' + trlClass + '"></span>' +
+        return '<div class="materiale-card" onclick="showDetail(\'' + eid + '\', \'' + tipo + '\')">' +
+            '<span class="trl-dot ' + trlDotClass + '"></span>' +
             '<div class="materiale-info">' +
                 '<div class="materiale-nome">' + nome + '</div>' +
                 '<div class="materiale-ingredienti">' + ingredienti + '</div>' +
@@ -8126,6 +8576,9 @@ function showIngredientDetail(id) {
             for (const mat of documentati) {
                 // Solo materiali replicabili con ingredienti
                 if (!mat.replicabile || !mat.ingredienti || mat.ingredienti.length === 0) continue;
+                // v97: Escludi ingredienti-come-materiale e placeholder
+                const matNome = mat.nome || mat.name || '';
+                if (ENTRY_TYPE_C.hasOwnProperty(matNome) || ENTRY_TYPE_D.has(matNome)) continue;
                 
                 let score = 0;
                 let matches = 0;
@@ -8205,7 +8658,18 @@ function showIngredientDetail(id) {
         }
         
         results.sort((a, b) => b.score - a.score || b.matchPercent - a.matchPercent);
-        return results.slice(0, 8); // Max 8 risultati
+        
+        // v95fix: Deduplica — stesso materiale può apparire in più output
+        const seen = {};
+        const deduped = [];
+        results.forEach(r => {
+            const key = r.mat.nome || r.mat.name;
+            if (!seen[key]) {
+                seen[key] = true;
+                deduped.push(r);
+            }
+        });
+        return deduped.slice(0, 8); // Max 8 risultati
     }
     
     function renderMatchingIngredients(results) {
@@ -8393,36 +8857,191 @@ function showIngredientDetail(id) {
         }
     }
     
-    // v72: Trade-offs tra filtri in conflitto
+    // v95: Sistema vincoli — impossibilità logiche, chimiche e strutturali
+    // Tre livelli: CHIMERA (impossibile), CONFLITTO (molto difficile), TRADE-OFF (compromesso)
     function renderTradeoffs() {
         const container = document.getElementById('projectTradeoffs');
         if (!container) return;
         
-        const conflicts = [
-            { a: 'flessibile', b: 'rigido', msg: 'Flessibile e rigido sono opposti. Il sistema cerchera un compromesso "semirigido", ma dovrai scegliere quale privilegiare.' },
-            { a: 'trasparente', b: 'rigido', msg: 'Trasparenza + rigidita: le cariche che danno struttura tendono a rendere opaco. Possibile con agar puro (rigido e trasparente) ma fragile.' },
-            { a: 'flessibile', b: 'resistente_acqua', msg: 'Flessibilita + resistenza acqua: i plastificanti (glicerina, sorbitolo) sono idrosolubili. Servira un coating lipidico esterno per proteggere.' },
-            { a: 'trasparente', b: 'resistente_acqua', msg: 'Trasparenza + barriera acqua: i lipidi che proteggono dall\'acqua rendono opaco. Possibile con gommalacca (traslucida) come coating esterno.' },
-            { a: 'trasparente', b: 'antibatterico', msg: 'Il chitosano (antibatterico) e naturalmente giallastro. Otterrai una buona trasparenza ma con tonalita calda, non cristallina.' },
-            { a: 'economico', b: 'antibatterico', msg: 'Il chitosano (antibatterico) non e tra i piu economici ne facili da reperire. Considera fonti online specializzate.' }
-        ];
+        var af = activeProjectFilters; // shorthand
+        var found = []; // {level, title, msg, suggestion?, icon}
         
-        let found = [];
-        conflicts.forEach(c => {
-            if (activeProjectFilters.has(c.a) && activeProjectFilters.has(c.b)) {
-                found.push(c.msg);
+        // ═══════════════════════════════════════════════════════
+        // LIVELLO 1: CHIMERE — combinazioni impossibili
+        // ═══════════════════════════════════════════════════════
+        
+        // Contraddizione logica diretta
+        if (af.has('flessibile') && af.has('rigido')) {
+            found.push({ level: 'chimera',
+                title: 'Contraddizione: flessibile + rigido',
+                msg: 'Un materiale non può essere flessibile e rigido allo stesso tempo. Sono proprietà meccaniche opposte: la flessibilità richiede catene mobili, la rigidità richiede catene bloccate.',
+                suggestion: 'Scegli un asse: flessibile (film, membrane) oppure rigido (pannelli, oggetti). Un "semirigido" è possibile ma è un compromesso, non la somma dei due.'
+            });
+        }
+        
+        // La chimera classica dei biomateriali
+        if (af.has('trasparente') && af.has('flessibile') && af.has('resistente_acqua')) {
+            found.push({ level: 'chimera',
+                title: 'Chimera: trasparente + flessibile + impermeabile',
+                msg: 'Questa è la "triplice impossibilità" dei biomateriali. I biopolimeri sono intrinsecamente idrofili (attraggono l\'acqua). Per renderli flessibili servono plastificanti (glicerina, sorbitolo) che sono igroscopici — assorbono acqua dall\'aria. Per impermeabilizzare servono lipidi o cere che però sono immiscibili con la matrice e producono torbidità (opacità).',
+                suggestion: 'Scegli 2 su 3: (a) trasparente + flessibile → film classico, ma sensibile all\'acqua; (b) flessibile + impermeabile → film con coating ceroso, ma opaco; (c) trasparente + impermeabile → gommalacca o zeina pura, ma rigida/fragile.'
+            });
+        }
+        
+        // Rigido + trasparente + resistente acqua (esiste solo con resine sintetiche)
+        if (af.has('rigido') && af.has('trasparente') && af.has('resistente_acqua')) {
+            found.push({ level: 'chimera',
+                title: 'Chimera: rigido + trasparente + impermeabile',
+                msg: 'Questa combinazione descrive essenzialmente il vetro o il PET — materiali sintetici ad alta energia. Nei biomateriali: la rigidità si ottiene con cariche (opache) o reticolazione (che spesso opacizza); l\'impermeabilità richiede idrofobicità che è rara nei biopolimeri trasparenti.',
+                suggestion: 'Il compromesso più vicino: gel di agar puro (rigido e trasparente, ma si dissolve in acqua calda) oppure resina di gommalacca (rigida e impermeabile, ma traslucida, non trasparente).'
+            });
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // LIVELLO 2: CONFLITTI CHIMICI/STRUTTURALI — molto difficile
+        // ═══════════════════════════════════════════════════════
+        
+        // Solo se non già coperto da una chimera
+        var hasChimera = found.some(function(f) { return f.level === 'chimera'; });
+        
+        if (!hasChimera) {
+            
+            // Flessibile + resistente acqua (conflitto chimico)
+            if (af.has('flessibile') && af.has('resistente_acqua')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto chimico: flessibilità vs impermeabilità',
+                    msg: 'I plastificanti (glicerina, sorbitolo) funzionano rompendo i legami idrogeno tra le catene polimeriche — ma questo rende il materiale permeabile all\'acqua. Chimicamente, flessibilità e barriera all\'acqua richiedono proprietà molecolari opposte.',
+                    suggestion: 'Strategie: (1) coating esterno con cera/gommalacca sul film flessibile; (2) SCOBY (cellulosa batterica), naturalmente flessibile e più idrofobo; (3) chitosano, parzialmente idrofobo.'
+                });
             }
-        });
+            
+            // Trasparente + resistente acqua (conflitto strutturale)
+            if (af.has('trasparente') && af.has('resistente_acqua')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto strutturale: trasparenza vs impermeabilità',
+                    msg: 'La trasparenza richiede omogeneità ottica (una sola fase). I lipidi e le cere che impermeabilizzano sono immiscibili con i biopolimeri acquosi — formano gocce o strati che diffondono la luce e rendono opaco. È un limite fisico, non una scelta progettuale.',
+                    suggestion: 'Unica eccezione parziale: gommalacca (resina naturale da insetto lac) — traslucida e impermeabile, ma non trasparente. Oppure zeina (proteina del mais) con solvente alcolico, ma il processo è più complesso.'
+                });
+            }
+            
+            // Flessibile + termostabile (conflitto chimico)
+            if (af.has('flessibile') && af.has('termostabile')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto chimico: flessibilità vs termostabilità',
+                    msg: 'I plastificanti abbassano la temperatura di transizione vetrosa (Tg) del materiale — lo rendono flessibile MA anche più sensibile al calore. Un film di gelatina+glicerina fonde sotto i 30°C. È un effetto chimico inevitabile: le stesse molecole che danno mobilità alle catene le rendono instabili al calore.',
+                    suggestion: 'Opzioni: (1) amido+glicerina (Tg più alta della gelatina); (2) chitosano (film flessibili senza plastificante, termostabili fino a ~200°C); (3) cellulosa batterica (SCOBY), naturalmente flessibile e termostabile.'
+                });
+            }
+            
+            // Trasparente + rigido (conflitto strutturale)
+            if (af.has('trasparente') && af.has('rigido')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto strutturale: trasparenza vs rigidità',
+                    msg: 'La rigidità nei biomateriali si ottiene con cariche (fibre, gusci, polveri) o forte reticolazione. Le cariche sono particelle solide che diffondono la luce → opacità. La reticolazione intensa può causare disomogeneità e torbidità.',
+                    suggestion: 'Eccezione: gel di agar o carragenina puri — rigidi E trasparenti, ma fragili e sensibili all\'acqua. Caseina reticolata con borace è rigida ma opaca.'
+                });
+            }
+            
+            // Resistente acqua + food-safe (conflitto chimico)
+            if (af.has('resistente_acqua') && af.has('food_safe')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto chimico: impermeabilità food-safe',
+                    msg: 'I reticolanti più efficaci per l\'impermeabilità (formaldeide, glutaraldeide) sono tossici. Il borace è discusso. Restano CaCl₂ (per alginato) e i tannini (astringenti), ma con risultati limitati.',
+                    suggestion: 'Per food-safe + impermeabile: alginato reticolato con CaCl₂ (approvato alimentare), oppure coating con cera carnauba o cera d\'api (entrambe food-safe).'
+                });
+            }
+            
+            // Antibatterico + vegano (conflitto di sourcing)
+            if (af.has('antibatterico') && af.has('vegano')) {
+                found.push({ level: 'conflitto',
+                    title: 'Conflitto di sourcing: antibatterico vegano',
+                    msg: 'Il chitosano — il principale biopolimero antibatterico — deriva dalla chitina dei crostacei (gusci di gamberi/granchi). Non è vegano. Esistono fonti fungine di chitosano ma sono rare e costose.',
+                    suggestion: 'Alternative vegane con proprietà antimicrobiche: curcuma o oli essenziali (es. origano, tea tree) come additivi in matrici polisaccaridiche. Efficacia inferiore ma documentata.'
+                });
+            }
+        
+        } // fine blocco !hasChimera
+        
+        // ═══════════════════════════════════════════════════════
+        // LIVELLO 3: TRADE-OFF — compromessi gestibili
+        // ═══════════════════════════════════════════════════════
+        
+        // Questi si mostrano sempre, anche con conflitti sopra
+        
+        if (af.has('trasparente') && af.has('antibatterico') && !hasChimera) {
+            found.push({ level: 'tradeoff',
+                title: 'Trasparenza + antibatterico',
+                msg: 'Il chitosano è naturalmente giallastro. Film di chitosano: buona trasparenza ma tonalità calda (ambra), non cristallina. Aggiungendo curcuma o spirulina come antimicrobici, il colore aumenta.',
+            });
+        }
+        if (af.has('economico') && af.has('antibatterico') && !hasChimera) {
+            found.push({ level: 'tradeoff',
+                title: 'Economico + antibatterico',
+                msg: 'Il chitosano non è economico né facile da reperire. Fonti: fornitori chimici online (Sigma-Aldrich, TCI). Per didattica, valutare curcuma come antimicrobico economico in matrice di amido.',
+            });
+        }
+        if (af.has('resistente_acqua') && af.has('vegano') && !af.has('antibatterico') && !hasChimera) {
+            found.push({ level: 'tradeoff',
+                title: 'Impermeabile + vegano',
+                msg: 'La gommalacca (ottimo impermeabilizzante) viene dall\'insetto lac — non vegana in senso stretto. Alternative: cera carnauba (da palma, vegana) con performance inferiore, oppure zeina (proteina del mais) disciolta in etanolo.',
+            });
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // NOTA STRUTTURALE — se 3+ filtri proprietà fisiche attivi
+        // ═══════════════════════════════════════════════════════
+        var physicalFilters = ['trasparente','flessibile','rigido','resistente_acqua','termostabile','antibatterico'];
+        var activePhysical = physicalFilters.filter(function(f) { return af.has(f); });
+        if (activePhysical.length >= 3 && !hasChimera) {
+            found.push({ level: 'nota',
+                title: 'Nota: molti requisiti fisici',
+                msg: 'Ogni proprietà aggiunta restringe molto le opzioni. I biomateriali hanno vincoli intrinseci: sono a base acquosa, termosensibili, biodegradabili. Con ' + activePhysical.length + ' requisiti fisici simultanei, le soluzioni reali saranno poche e con compromessi. La plastica sintetica è "facile" proprio perché ignora tutti questi vincoli.',
+            });
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // RENDERING
+        // ═══════════════════════════════════════════════════════
         
         if (found.length === 0) {
             container.style.display = 'none';
+            window._isChimera = false;
+            window._hasConflict = false;
             return;
         }
         
+        window._isChimera = hasChimera;
+        window._hasConflict = found.some(function(f) { return f.level === 'conflitto'; });
         container.style.display = 'block';
-        let html = '<div class="tradeoff-label">Trade-offs nelle tue esigenze</div>';
-        found.forEach(msg => {
-            html += '<div class="tradeoff-box">' + msg + '</div>';
+        
+        var html = '';
+        found.forEach(function(item) {
+            if (item.level === 'chimera') {
+                html += '<div style="background:#fff0f0;border:2px solid #e53935;border-radius:8px;padding:0.5rem 0.6rem;margin-top:0.4rem;">';
+                html += '<div style="font-weight:700;color:#c62828;font-size:0.75rem;margin-bottom:0.2rem;">' + item.title + '</div>';
+                html += '<div style="font-size:0.68rem;color:#333;line-height:1.45;margin-bottom:0.25rem;">' + item.msg + '</div>';
+                if (item.suggestion) {
+                    html += '<div style="font-size:0.65rem;color:#2d5a3d;background:#e8f5e9;padding:0.25rem 0.4rem;border-radius:5px;line-height:1.4;">' + item.suggestion + '</div>';
+                }
+                html += '</div>';
+            } else if (item.level === 'conflitto') {
+                html += '<div style="background:#fff8e1;border:2px solid #f9a825;border-radius:8px;padding:0.5rem 0.6rem;margin-top:0.4rem;">';
+                html += '<div style="font-weight:700;color:#e65100;font-size:0.73rem;margin-bottom:0.2rem;">' + item.title + '</div>';
+                html += '<div style="font-size:0.68rem;color:#333;line-height:1.45;margin-bottom:0.25rem;">' + item.msg + '</div>';
+                if (item.suggestion) {
+                    html += '<div style="font-size:0.65rem;color:#4a148c;background:#f3e5f5;padding:0.25rem 0.4rem;border-radius:5px;line-height:1.4;">' + item.suggestion + '</div>';
+                }
+                html += '</div>';
+            } else if (item.level === 'tradeoff') {
+                html += '<div style="background:#f5f5f5;border:1px solid #bdbdbd;border-radius:6px;padding:0.4rem 0.55rem;margin-top:0.35rem;">';
+                html += '<div style="font-weight:600;color:#555;font-size:0.7rem;margin-bottom:0.15rem;">' + item.title + '</div>';
+                html += '<div style="font-size:0.65rem;color:#555;line-height:1.4;">' + item.msg + '</div>';
+                html += '</div>';
+            } else if (item.level === 'nota') {
+                html += '<div style="background:#e8eaf6;border:1px solid #9fa8da;border-radius:6px;padding:0.35rem 0.5rem;margin-top:0.35rem;">';
+                html += '<div style="font-size:0.65rem;color:#283593;line-height:1.4;">' + item.msg + '</div>';
+                html += '</div>';
+            }
         });
         container.innerHTML = html;
     }
@@ -8444,6 +9063,9 @@ function showIngredientDetail(id) {
             return;
         }
         
+        // v95: Se chimera rilevata, non mostrare percorsi pieni — solo compromessi
+        var isChimera = window._isChimera || false;
+        
         // Filtri "proprietà " (da ottimizzare) vs "vincolo" (da rispettare)
         var propFilters = filters.filter(function(f) { return ['vegano','food_safe','economico'].indexOf(f) === -1; });
         var hasVegano = activeProjectFilters.has('vegano');
@@ -8454,12 +9076,14 @@ function showIngredientDetail(id) {
         // Ogni blueprint definisce: famiglia matrice, filtro specifico (opz.),
         // modificatori necessari, proprietà  raggiunte, nota didattica
         var BLUEPRINTS = [
-            // ███ PROTEINE – film classici ███
+            // ███ PROTEINE – film classici (gelatina, albumina — NO caseina) ███
             { mFam:'PROTEINA', mods:[{f:'PLASTIFICANTE',r:'per flessibilità'}],
               achieves:['flessibile','trasparente','food_safe'],
+              mFilter: function(i){ var n=i.nome.toLowerCase(); return n.indexOf('caseina')===-1; },
               note:'Film proteico classico – trasparente SOLO senza cariche/coloranti. Il plastificante aumenta flessibilità.' },
             { mFam:'PROTEINA', mods:[{f:'PLASTIFICANTE',r:'per flessibilità'},{f:'LIPIDE',r:'come coating impermeabilizzante'}],
               achieves:['flessibile','resistente_acqua','food_safe'],
+              mFilter: function(i){ var n=i.nome.toLowerCase(); return n.indexOf('caseina')===-1; },
               note:'Film proteico con barriera lipidica – lo strato di cera protegge dall\'acqua' },
             { mFam:'PROTEINA', mods:[{f:'CARICA',r:'come rinforzo strutturale'}],
               achieves:['rigido','food_safe'],
@@ -8593,15 +9217,24 @@ function showIngredientDetail(id) {
             });
             if (!modOk) return;
             
-            // 3. Score: quante proprietà  attive soddisfa questo blueprint?
+            // 3. Score: quante proprietà attive soddisfa questo blueprint?
             var score = 0;
+            var misses = 0;
+            var missingFilters = [];
+            var FILTER_LABELS = {trasparente:'trasparenza',flessibile:'flessibilità',rigido:'rigidità',resistente_acqua:'resist. acqua',termostabile:'termostabilità',antibatterico:'antibatterico',vegano:'vegano',food_safe:'food-safe',economico:'economico'};
             propFilters.forEach(function(f) {
                 if (bp.achieves.indexOf(f) !== -1) score++;
+                else { misses++; missingFilters.push(FILTER_LABELS[f] || f); }
             });
-            // Se nessun filtro proprietà  attivo (solo vincoli), accetta tutto
-            if (propFilters.length === 0) score = 1;
-            // Se ha filtri proprietà  ma score 0, skip
+            // Se nessun filtro proprietà attivo (solo vincoli), accetta tutto
+            if (propFilters.length === 0) { score = 1; misses = 0; }
+            // Se ha filtri proprietà ma score 0, skip
             if (propFilters.length > 0 && score === 0) return;
+            
+            // v95: penalizza pesantemente i match parziali
+            var matchRatio = propFilters.length > 0 ? score / propFilters.length : 1;
+            var effectiveScore = score * 100 + Math.round(matchRatio * 50);
+            var isPartial = misses > 0 && propFilters.length > 0;
             
             // 4. Genera path per max 2 matrici candidate (varietà )
             var maxM = matrices.length > 1 ? 2 : 1;
@@ -8631,7 +9264,10 @@ function showIngredientDetail(id) {
                     ingredients: pathIngs,
                     note: bp.note,
                     ids: pathIngs.map(function(p){ return p.id; }),
-                    score: score,
+                    score: effectiveScore,
+                    isPartial: isPartial,
+                    misses: misses,
+                    missingFilters: missingFilters,
                     nIngs: pathIngs.length
                 });
             });
@@ -8651,9 +9287,36 @@ function showIngredientDetail(id) {
             }
         });
         window._allPathsCount = dedupAll.length;
-        var paths = dedupAll.slice(0, 6);
+        // v95: separate full matches from partial, show full first
+        var fullMatches = dedupAll.filter(function(p) { return !p.isPartial; });
+        var partialMatches = dedupAll.filter(function(p) { return p.isPartial; });
         
-        if (paths.length === 0) {
+        var paths, showPartialHeader = false, chimeraNoResults = false;
+        
+        if (isChimera) {
+            // Chimera: NON mostrare full matches (sarebbero falsi), solo compromessi
+            paths = partialMatches.slice(0, 4);
+            if (paths.length === 0) {
+                chimeraNoResults = true;
+                paths = [];
+            }
+        } else {
+            paths = fullMatches.slice(0, 6);
+            if (paths.length < 4 && partialMatches.length > 0) {
+                showPartialHeader = paths.length > 0;
+                paths = paths.concat(partialMatches.slice(0, 6 - paths.length));
+            }
+        }
+        
+        if (paths.length === 0 && !chimeraNoResults) {
+            // v95: no results but has conflicts? Show explanation
+            if (window._hasConflict) {
+                pathsDiv.style.display = 'block';
+                var pathsH = document.getElementById('pathsHeader');
+                if (pathsH) { pathsH.textContent = 'Nessun percorso'; pathsH.style.color = '#999'; }
+                content.innerHTML = '<div style="text-align:center;font-size:0.68rem;color:#888;padding:0.5rem;background:#fafafa;border-radius:6px;">I conflitti chimici/strutturali sopra rendono questa combinazione molto difficile. Prova a rimuovere un requisito.</div>';
+                return;
+            }
             pathsDiv.style.display = 'none';
             return;
         }
@@ -8661,13 +9324,51 @@ function showIngredientDetail(id) {
         window._suggestedPaths = paths;
         pathsDiv.style.display = 'block';
         
+        // v95: aggiorna header dinamicamente
+        var pathsH = document.getElementById('pathsHeader');
+        if (pathsH) {
+            if (isChimera) {
+                pathsH.textContent = 'Compromessi possibili';
+                pathsH.style.color = '#b86800';
+            } else if (window._hasConflict) {
+                pathsH.textContent = 'Percorsi (con compromessi)';
+                pathsH.style.color = '#e65100';
+            } else {
+                pathsH.textContent = 'Percorsi consigliati';
+                pathsH.style.color = '#2d5a3d';
+            }
+        }
+        
         var html = '';
+        
+        if (isChimera) {
+            if (chimeraNoResults) {
+                html += '<div style="text-align:center;font-size:0.7rem;color:#999;padding:0.5rem;background:#fafafa;border-radius:6px;margin-top:0.4rem;">';
+                html += 'Nessun percorso soddisfa nemmeno parzialmente questa combinazione.';
+                html += '</div>';
+            } else {
+                html += '<div style="font-size:0.65rem;color:#b86800;margin-bottom:0.3rem;padding:0.3rem 0.45rem;background:#fff8e1;border:1px solid #ffe082;border-radius:5px;text-align:center;line-height:1.4;">';
+                html += 'I migliori <b>compromessi</b> possibili — nessuno soddisfa tutti i requisiti';
+                html += '</div>';
+            }
+        }
+        
+        var partialHeaderShown = false;
         paths.forEach(function(path, idx) {
+            // v95: separator before partial matches
+            if (showPartialHeader && !partialHeaderShown && path.isPartial) {
+                partialHeaderShown = true;
+                html += '<div style="font-size:0.65rem;color:#b86800;margin:0.4rem 0 0.2rem;padding:0.25rem 0.4rem;background:#fff8e1;border-radius:4px;text-align:center;">Match parziali — non tutte le proprietà richieste</div>';
+            }
             var diffCol = path.difficulty === 'Facile' ? '#4caf50' : (path.difficulty === 'Medio' ? '#ff9800' : '#e53935');
-            html += '<div class="path-card">';
+            var partialStyle = path.isPartial ? 'border-left:3px solid #ffc107;opacity:0.85;' : '';
+            html += '<div class="path-card" style="' + partialStyle + '">';
             html += '<div class="path-card-content">';
             html += '<div class="path-card-title">' + path.title;
             html += ' <span style="font-size:0.65rem;color:' + diffCol + ';font-weight:400;margin-left:0.4rem;">' + path.difficulty + '</span>';
+            if (path.isPartial && path.missingFilters && path.missingFilters.length > 0) {
+                html += ' <span style="font-size:0.55rem;color:#c62828;background:#ffebee;padding:1px 5px;border-radius:3px;margin-left:0.3rem;">✗ ' + path.missingFilters.join(', ') + '</span>';
+            }
             html += '</div>';
             if (path.note) {
                 html += '<div style="font-size:0.67rem;color:#666;margin:0.15rem 0 0.3rem;font-style:italic;line-height:1.4;">' + path.note + '</div>';
@@ -8821,7 +9522,228 @@ function showIngredientDetail(id) {
         showPathDetail(pathIndex);
     }
 
-    // v73: Carica un percorso suggerito nel tavolo e vai a Tab C
+    // ═══════════════════════════════════════════════════
+    // v93: PERCORSI PER APPLICAZIONE — "Cosa vuoi fare?"
+    // ═══════════════════════════════════════════════════
+    var APP_SCENARIOS = [
+        { id:'packaging', img:'Packaging.jpg', label:'Packaging',
+          desc:'Involucri, buste, pellicole per alimenti o oggetti. Si sciolgono in acqua o compostano.',
+          paths:[
+            { name:'Film gelatina + glicerina', ings:['gelatina','glicerina'], diff:'Facile',
+              note:'Termosaldabile a 50-60°C, trasparente, si scioglie in acqua calda. Ottimo per bustine monodose.' },
+            { name:'Film amido + glicerina', ings:['amido_mais','glicerina'], diff:'Facile',
+              note:'Economico e compostabile. Meno trasparente della gelatina ma più termostabile.' },
+            { name:'Film alginato reticolato', ings:['alginato','cloruro_calcio','glicerina'], diff:'Medio',
+              note:'Resistente all\'acqua (reticolato), non fonde. Più complesso: serve bagno in CaCl₂.' }
+          ],
+          tradeoff:'Il packaging biodegradabile è sensibile all\'acqua per definizione. Per resistenza, servono coating lipidici o reticolazione — ma complicano il processo e riducono la compostabilità.',
+          filters:['flessibile','food_safe','trasparente']
+        },
+        { id:'gioiello', img:'Gioiello.jpg', label:'Gioiello',
+          desc:'Pezzi rigidi lavorabili: bottoni, perle, ciondoli, piccoli oggetti decorativi.',
+          paths:[
+            { name:'Caseina + tannini (naturale)', ings:['caseina','tannino'], diff:'Medio',
+              note:'Simil-Galalite storica. Si staglia, leviga, lucida. Color ambra/noce. Stagionatura 1-7 giorni.' },
+            { name:'Caseina + borace (classica)', ings:['caseina','borace'], diff:'Facile',
+              note:'Plastica dura, lavorabile. Il borace è tossico: guanti e supervisione obbligatori.' },
+            { name:'Resina colofonia + carica', ings:['colofonia','fondi_caffe'], diff:'Medio',
+              note:'Aspetto ambra/fossile con inclusioni. Fusione a caldo, si cola in stampi.' }
+          ],
+          tradeoff:'Più un biomateriale è duro e durevole, meno è biodegradabile. La caseina indurita con tannini dura anni. Scegli: oggetto effimero (gelatina) o durevole (caseina)?',
+          filters:['rigido']
+        },
+        { id:'contenitore', img:'Contenitore.jpg', label:'Contenitore',
+          desc:'Ciotole, vassoi, recipienti. Forme 3D autoportanti.',
+          paths:[
+            { name:'Alginato + CaCl₂ (forme 3D)', ings:['alginato','cloruro_calcio'], diff:'Medio',
+              note:'Gelificazione ionica istantanea. Perfetto per forme complesse. Bagno in CaCl₂ 2-5%.' },
+            { name:'Polpa carta + amido (ciotole)', ings:['polpa_cellulosa','amido_mais'], diff:'Facile',
+              note:'Come cartapesta rinforzata. Si pressa in stampi. Rigido una volta asciutto, compostabile.' },
+            { name:'Agar rigido (stampo a caldo)', ings:['agar','glicerina'], diff:'Medio',
+              note:'Si cola caldo in stampo, gelifica raffreddandosi. Termostabile (non fonde sotto 85°C).' }
+          ],
+          tradeoff:'Per contenere liquidi serve impermeabilità: coating in cera d\'api o gommalacca. Senza coating, i contenitori bio reggono solo materiali asciutti.',
+          filters:['rigido','food_safe']
+        },
+        { id:'tessuto', img:'Tessuto.jpg', label:'Tessuto',
+          desc:'Materiali cucibili, drappeggiabili, indossabili. Simil-pelle e simil-tessuto.',
+          paths:[
+            { name:'SCOBY (cellulosa batterica)', ings:['scoby'], diff:'Avanzato',
+              note:'Crescita biologica 2-3 settimane. Simil-pelle quando asciutto. Cucibile, colorabile. Richiede pazienza.' },
+            { name:'Gelatina spessa + glicerina', ings:['gelatina','glicerina'], diff:'Facile',
+              note:'Film spesso (3-5mm) flessibile come pelle morbida. Prototipi rapidi, ma sensibile ad acqua e calore.' },
+            { name:'Gelatina + tannini (simil-cuoio)', ings:['gelatina','tannino','glicerina'], diff:'Medio',
+              note:'I tannini "conciano" la gelatina: più resistente all\'acqua e al calore. Color cuoio naturale.' }
+          ],
+          tradeoff:'La vera sfida è la durabilità: SCOBY dura mesi ma richiede settimane. Gelatina è rapida ma fragile ad acqua. Compromesso: gelatina conciata con tannini.',
+          filters:['flessibile']
+        },
+        { id:'schiuma', img:'Schiuma.jpg', label:'Schiuma',
+          desc:'Materiali leggeri, espansi, isolanti. Tipo polistirolo biodegradabile.',
+          paths:[
+            { name:'Aquafaba montata + amido', ings:['aquafaba','amido_mais'], diff:'Medio',
+              note:'Si monta a neve, si stabilizza con amido e si essicca. Leggero e rigido, come meringhe strutturali.' },
+            { name:'Caseina espansa', ings:['caseina','bicarbonato'], diff:'Medio',
+              note:'Il bicarbonato genera CO₂ nell\'impasto acido, creando bolle. Si pressa e asciuga.' },
+            { name:'Micelio su substrato', ings:['micelio'], diff:'Avanzato',
+              note:'Il micelio cresce attraverso un substrato (segatura, paglia) in 5-7 giorni. Tipo polistirolo naturale.' }
+          ],
+          tradeoff:'Le schiume bio sono fragili: reggono compressione leggera ma non impatti. Per imballaggi protettivi servono spessori generosi (3-5 cm).',
+          filters:['rigido']
+        },
+        { id:'coating', img:'Coating2.jpg', label:'Coating',
+          desc:'Rivestimenti protettivi: impermeabilizzanti, antibatterici, decorativi.',
+          paths:[
+            { name:'Cera carnauba / d\'api', ings:['cera_carnauba'], diff:'Facile',
+              note:'Si scioglie a caldo e si applica a pennello o immersione. Barriera idrofoba naturale.' },
+            { name:'Chitosano antibatterico', ings:['chitosano','acido_citrico'], diff:'Medio',
+              note:'Film sottile con proprietà antimicrobiche. Si dissolve in soluzione acida e si applica.' },
+            { name:'Gommalacca (shellac)', ings:['gommalacca'], diff:'Facile',
+              note:'Resina naturale, alta lucentezza, buona barriera. Usata da secoli su legno e alimenti.' }
+          ],
+          tradeoff:'I coating naturali hanno limiti: la cera si graffia, il chitosano è sensibile al pH, la gommalacca non è vegana. Nessuno eguaglia la plastica — ma per molti usi basta.',
+          filters:['resistente_acqua']
+        },
+        { id:'stampo', img:'Stampo.jpg', label:'Stampo',
+          desc:'Forme temporanee riutilizzabili per colate, calchi, prototipi.',
+          paths:[
+            { name:'Agar 5-8% (riutilizzabile)', ings:['agar'], diff:'Facile',
+              note:'Si scioglie in acqua bollente, si cola, gelifica freddo. Riutilizzabile 3-5 volte rifondendo.' },
+            { name:'Gelatina termoreversibile', ings:['gelatina'], diff:'Facile',
+              note:'Fonde a 50-60°C, gelifica sotto 25°C. Più elastica dell\'agar, ideale per sottosquadri.' }
+          ],
+          tradeoff:'Agar: più rigido, termostabile (non fonde in mano), ma fragile. Gelatina: più elastica e dettagliata, ma fonde a temperatura ambiente.',
+          filters:['rigido','termostabile']
+        },
+        { id:'scultura', img:'Scultura.jpg', label:'Scultura',
+          desc:'Effetti materici, inclusioni, texture. Espressione artistica con biomateriali.',
+          paths:[
+            { name:'Gelatina + curcuma (ambra)', ings:['gelatina','curcuma','glicerina'], diff:'Facile',
+              note:'Effetto ambra traslucida con tonalit dorata. Si possono includere fiori, foglie, oggetti.' },
+            { name:'Caseina + gesso (pietra)', ings:['caseina','gesso'], diff:'Medio',
+              note:'Aspetto simile a pietra o marmo chiaro. Lavorabile con carta vetrata, stagionatura lenta.' },
+            { name:'Agar + fondi caffè (fossile)', ings:['agar','fondi_caffe'], diff:'Facile',
+              note:'Aspetto terroso con grana naturale. Perfetto per inclusioni tipo reperto archeologico.' },
+            { name:'Amido + bucce (materico)', ings:['amido_mais','bucce_agrumi'], diff:'Facile',
+              note:'Texture organica con frammenti visibili. Ogni pezzo è unico. Profumo di agrumi.' }
+          ],
+          tradeoff:'L\'arte con biomateriali è effimera per natura. Abbraccia la trasformazione: il materiale cambia colore, si ritira, degrada. Documenta il processo, non solo il risultato.',
+          filters:[]
+        }
+    ];
+    var _activeAppId = null;
+
+    function initAppGrid() {
+        var grid = document.getElementById('appGrid');
+        if (!grid) return;
+        var html = '';
+        APP_SCENARIOS.forEach(function(app) {
+            html += '<div class="app-chip" data-app="' + app.id + '" onclick="selectApp(\'' + app.id + '\')">';
+            html += '<div class="app-img-wrap">';
+            html += '<img src="data/files/' + app.img + '" alt="' + app.label + '">';
+            html += '<span class="app-check">&#10003;</span>';
+            html += '</div>';
+            html += '<span class="app-chip-label">' + app.label + '</span>';
+            html += '</div>';
+        });
+        grid.innerHTML = html;
+    }
+
+    function selectApp(appId) {
+        var detail = document.getElementById('appDetail');
+        var chips = document.querySelectorAll('.app-chip');
+        var ings = INGREDIENTI_DATA?.ingredienti || {};
+
+        // Toggle: deseleziona se stesso
+        if (_activeAppId === appId) {
+            _activeAppId = null;
+            chips.forEach(function(c) { c.classList.remove('active'); });
+            detail.classList.remove('visible');
+            return;
+        }
+
+        _activeAppId = appId;
+        chips.forEach(function(c) {
+            c.classList.toggle('active', c.dataset.app === appId);
+        });
+
+        var app = APP_SCENARIOS.find(function(a) { return a.id === appId; });
+        if (!app) return;
+
+        var html = '<div class="app-detail-title">' + app.label + '</div>';
+        html += '<div class="app-detail-desc">' + app.desc + '</div>';
+        html += '<div class="app-detail-paths">';
+        
+        app.paths.forEach(function(p, idx) {
+            var diffCol = p.diff === 'Facile' ? '#4caf50' : (p.diff === 'Medio' ? '#ff9800' : '#e53935');
+            html += '<div class="app-detail-path">';
+            html += '<div class="app-detail-path-name">' + p.name + ' <span style="font-size:0.6rem;color:' + diffCol + ';font-weight:400;">' + p.diff + '</span></div>';
+            html += '<div class="app-detail-path-ings">';
+            p.ings.forEach(function(ingId) {
+                var ing = ings[ingId];
+                var name = ing ? ing.nome : ingId;
+                var cls = 'path-ing-chip';
+                if (ing && (ing.famiglia === 'PLASTIFICANTE' || ing.famiglia === 'SALE_RETICOLANTE' || ing.famiglia === 'LIPIDE' || ing.famiglia === 'CARICA' || ing.famiglia === 'COLORANTE' || ing.famiglia === 'ACIDO')) cls += ' modifier';
+                html += '<span class="' + cls + '">' + name + '</span>';
+            });
+            html += '</div>';
+            html += '<div class="app-detail-path-note">' + p.note + '</div>';
+            html += '<button class="app-detail-path-load" onclick="loadAppPath(\'' + appId + '\', ' + idx + ')">+ Carrello</button>';
+            html += '</div>';
+        });
+        html += '</div>';
+
+        if (app.tradeoff) {
+            html += '<div class="app-detail-tradeoff">' + app.tradeoff + '</div>';
+        }
+
+        detail.innerHTML = html;
+        detail.classList.add('visible');
+        // Scroll into view
+        setTimeout(function() { detail.scrollIntoView({ behavior:'smooth', block:'nearest' }); }, 50);
+    }
+
+    function loadAppPath(appId, pathIdx) {
+        var app = APP_SCENARIOS.find(function(a) { return a.id === appId; });
+        if (!app || !app.paths[pathIdx]) return;
+        var ings = INGREDIENTI_DATA?.ingredienti || {};
+        var path = app.paths[pathIdx];
+        var added = 0;
+        path.ings.forEach(function(ingId) {
+            var ing = ings[ingId];
+            if (!ing) return;
+            if (cart.find(function(c) { return c.id === ingId; })) return;
+            cart.push(Object.assign({}, ing, { id: ingId, informativo: false }));
+            added++;
+        });
+        if (added > 0) {
+            updateCart();
+            renderIngredientList();
+            saveCartToStorage();
+            showToast(added + ' ingredienti aggiunti al carrello da "' + app.label + '"', 'success');
+        } else {
+            showToast('Ingredienti già tutti nel carrello', 'info');
+        }
+    }
+
+    function applyAppFilters(appId) {
+        var app = APP_SCENARIOS.find(function(a) { return a.id === appId; });
+        if (!app || !app.filters) return;
+        // Reset existing filters
+        activeProjectFilters.clear();
+        document.querySelectorAll('.filter-chip').forEach(function(c) { c.classList.remove('active'); });
+        // Apply
+        app.filters.forEach(function(f) {
+            activeProjectFilters.add(f);
+            var chip = document.querySelector('.filter-chip[data-filter="' + f + '"]');
+            if (chip) chip.classList.add('active');
+        });
+        updateProjectResults();
+        // Scroll to paths
+        var pathsDiv = document.getElementById('projectPaths');
+        if (pathsDiv) setTimeout(function() { pathsDiv.scrollIntoView({ behavior:'smooth', block:'start' }); }, 200);
+        showToast('Filtri applicati per "' + app.label + '"', 'success');
+    }
     function tryPath(pathIndex) {
         const paths = window._suggestedPaths;
         if (!paths || !paths[pathIndex]) return;
@@ -9672,6 +10594,73 @@ function showIngredientDetail(id) {
         ],
     };
 
+    // ── STRUCTURAL NOTES ──
+    // When a problem is intrinsic to the recipe (not fixable by dosage),
+    // show an explicit explanation. Each entry: check(activeIds, activeFams) → message
+    const STRUCTURAL_NOTES = {
+        calore: {
+            check: function(ids, fams) {
+                return ids.indexOf('gelatina') !== -1 && fams.indexOf('SALE_RETICOLANTE') === -1;
+            },
+            text: 'Problema intrinseco. La gelatina fonde a 25-30\u00b0C \u2014 questo \u00e8 un limite chimico della proteina, non un errore di dosaggio. L\'unica via \u00e8 la reticolazione con tannini (che scurisce il materiale) o cambiare matrice (agar fonde a 85\u00b0C).',
+        },
+        fragile: {
+            check: function(ids, fams) {
+                var hasAgar = ids.indexOf('agar') !== -1;
+                var hasCaseina = ids.some(function(i){ return i.indexOf('caseina') !== -1; });
+                return (hasAgar || hasCaseina) && fams.indexOf('PLASTIFICANTE') === -1;
+            },
+            text: 'Fragilit\u00e0 intrinseca della matrice. Agar e caseina formano strutture rigide per natura chimica (agar: doppia elica; caseina: aggregati proteici). Il plastificante aiuta ma non trasforma questi materiali in film flessibili come la gelatina. Per flessibilit\u00e0 vera, valutare cambio di matrice.',
+        },
+        troppo_rigido: {
+            check: function(ids, fams) {
+                var hasAgar = ids.indexOf('agar') !== -1;
+                var hasCaseina = ids.some(function(i){ return i.indexOf('caseina') !== -1; });
+                var hasAmidoMais = ids.indexOf('amido_mais') !== -1;
+                return hasAgar || hasCaseina || hasAmidoMais;
+            },
+            text: 'Rigidit\u00e0 strutturale della matrice. Queste matrici sono rigide per natura chimica. Aggiungere plastificante migliora la situazione ma ha limiti: oltre il 30% si rischia appiccicosit\u00e0 senza vera flessibilit\u00e0. Per risultati flessibili, considerare gelatina o blend gelatina+amido.',
+        },
+        appiccicoso: {
+            check: function(ids, fams) {
+                return fams.indexOf('PLASTIFICANTE') !== -1;
+            },
+            text: 'Questo \u00e8 un problema di dosaggio, non strutturale. La glicerina \u00e8 igroscopica: assorbe umidit\u00e0 dall\'aria e mantiene la superficie umida. Ridurre il plastificante sotto il 25% del peso matrice, oppure sostituire parzialmente con sorbitolo (meno igroscopico).',
+        },
+        delaminazione: {
+            check: function(ids, fams) {
+                return fams.indexOf('LIPIDE') !== -1 && fams.indexOf('EMULSIONANTE') === -1;
+            },
+            text: 'Separazione di fase prevedibile. Acqua e lipidi sono immiscibili: senza emulsionante (lecitina), il lipide forma strati separati che si delaminano. \u00c8 fisica, non un difetto. Soluzioni: aggiungere lecitina, oppure applicare il lipide come coating esterno anzich\u00e9 miscelato.',
+        },
+        non_gelifica: {
+            check: function(ids, fams) {
+                return ids.indexOf('alginato') !== -1 && fams.indexOf('SALE_RETICOLANTE') === -1;
+            },
+            text: 'L\'alginato non gelifica da solo. Serve un bagno in CaCl\u2082 (ioni Ca\u00b2\u207a) per formare il gel ionico. Senza reticolante si ottiene solo una soluzione viscosa. Non \u00e8 un problema di temperatura o concentrazione.',
+        },
+        muffe: {
+            check: function(ids, fams) {
+                var hasScarti = ids.some(function(id) { return ['fondi_caffe','pula_riso','bucce_agrumi','segatura'].indexOf(id) !== -1; });
+                var hasProteina = fams.indexOf('PROTEINA') !== -1;
+                return (hasScarti || hasProteina) && ids.indexOf('chitosano') === -1 && ids.indexOf('acido_citrico') === -1;
+            },
+            text: 'Rischio biologico elevato. Proteine e scarti organici sono substrati ideali per muffe e batteri. Senza antimicrobici (chitosano, acido citrico) o conservanti, la contaminazione \u00e8 quasi inevitabile in ambienti umidi. \u00c8 un limite intrinseco dei biomateriali a base organica.',
+        },
+        crepe: {
+            check: function(ids, fams) {
+                return fams.indexOf('PLASTIFICANTE') === -1 && (fams.indexOf('PROTEINA') !== -1 || fams.indexOf('POLISACCARIDE_NEUTRO') !== -1);
+            },
+            text: 'Fessurazione prevedibile. Senza plastificante, l\'essiccazione crea tensioni interne nella matrice che superano la resistenza del film. Non \u00e8 un problema di processo (velocit\u00e0 di asciugatura) ma di composizione: servono plastificanti per dare mobilit\u00e0 alle catene.',
+        },
+        retrogradazione: {
+            check: function(ids) {
+                return ids.indexOf('amido_mais') !== -1;
+            },
+            text: 'Processo inevitabile per amido di mais. L\'alto contenuto di amilosio (25-28%) del mais causa retrogradazione rapida. \u00c8 lo stesso fenomeno del pane raffermo. Il plastificante rallenta ma non elimina il processo. Per materiali stabili nel tempo, preferire amidi cerosi (waxy) o tapioca (basso amilosio).',
+        },
+    };
+
     // ── TAB D STATE ──
     let tabD_tavolo = []; // [{id, nome, fam, active, type: 'base'|'correttivo'}]
     let tabD_activeFilter = 'all';
@@ -9820,8 +10809,40 @@ function showIngredientDetail(id) {
     }
 
     function tabD_updateAll() {
+        tabD_updateStructuralNotes();
         tabD_updateContextZone();
         tabD_updateLabButton();
+    }
+
+    function tabD_updateStructuralNotes() {
+        var active = tabD_getActiveItems();
+        var aIds = active.map(function(c) { return c.id; });
+        var aFams = []; active.forEach(function(c) { if (aFams.indexOf(c.fam) === -1) aFams.push(c.fam); });
+        
+        // For each problem with a possible structural note, update the DOM
+        Object.keys(STRUCTURAL_NOTES).forEach(function(probId) {
+            var card = document.querySelector('.td-problem-card[data-id="' + probId + '"]');
+            if (!card) return;
+            var existing = card.querySelector('.td-structural-note');
+            var sNote = STRUCTURAL_NOTES[probId];
+            var shouldShow = active.length > 0 && sNote.check(aIds, aFams);
+            
+            if (shouldShow && !existing) {
+                // Insert after CAUSA section
+                var causaSection = card.querySelectorAll('.td-pc-section');
+                var insertAfter = causaSection.length >= 2 ? causaSection[1] : causaSection[0]; // CAUSA is 2nd section
+                if (insertAfter) {
+                    var noteDiv = document.createElement('div');
+                    noteDiv.className = 'td-structural-note';
+                    noteDiv.textContent = sNote.text;
+                    insertAfter.parentNode.insertBefore(noteDiv, insertAfter.nextSibling);
+                }
+            } else if (!shouldShow && existing) {
+                existing.remove();
+            } else if (shouldShow && existing) {
+                existing.textContent = sNote.text; // update text if needed
+            }
+        });
     }
 
     function tabD_updateLabButton() {
@@ -9948,7 +10969,8 @@ function showIngredientDetail(id) {
                     if (applies) score += m.score;
                 });
             }
-            return { id: p.id, gruppo: p.gruppo, titolo: p.titolo, gravita: p.gravita, score: score };
+            return { id: p.id, gruppo: p.gruppo, titolo: p.titolo, gravita: p.gravita, score: score,
+                structural: !!(STRUCTURAL_NOTES[p.id] && STRUCTURAL_NOTES[p.id].check(activeIds, activeFams)) };
         }).filter(function(p) { return p.score > 0; }).sort(function(a, b) { return b.score - a.score; });
 
         return scored;
@@ -9976,11 +10998,15 @@ function showIngredientDetail(id) {
 
         zone.className = 'td-context';
         var top = relevant.slice(0, 6);
-        title.innerHTML = '⚠ ' + relevant.length + ' problemi probabili con ' + active.length + ' ingredienti attivi';
+        var structCount = relevant.filter(function(p) { return p.structural; }).length;
+        var titleText = '' + relevant.length + ' problemi probabili con ' + active.length + ' ingredienti attivi';
+        if (structCount > 0) titleText += ' \u2014 ' + structCount + ' intrinsec' + (structCount === 1 ? 'o' : 'i') + ' (non risolvibil' + (structCount === 1 ? 'e' : 'i') + ' con dosaggio)';
+        title.innerHTML = titleText;
         chips.innerHTML = top.map(function(p) {
             var gDots = '';
             for (var i = 0; i < 5; i++) gDots += '<span class="td-gbar' + (i < p.gravita ? ' g' + (i + 1) : '') + '"></span>';
-            return '<span class="td-context-chip" onclick="tabD_scrollToAndOpen(\'' + p.id + '\')">' + p.titolo + ' <span class="td-grav">' + gDots + '</span></span>';
+            var structLabel = p.structural ? '<span class="td-struct-badge">intrinseco</span>' : '';
+            return '<span class="td-context-chip' + (p.structural ? ' structural' : '') + '" onclick="tabD_scrollToAndOpen(\'' + p.id + '\')">' + p.titolo + structLabel + ' <span class="td-grav">' + gDots + '</span></span>';
         }).join('');
 
         var corr = tabD_getCorrettivi();
@@ -10089,6 +11115,17 @@ function showIngredientDetail(id) {
             var bodyHTML = '';
             bodyHTML += '<div class="td-pc-section"><div class="td-pc-section-title">SINTOMO</div><div class="td-pc-text">' + p.sintomo + '</div></div>';
             bodyHTML += '<div class="td-pc-section"><div class="td-pc-section-title">CAUSA</div><div class="td-pc-text">' + p.causa + '</div></div>';
+
+            // Structural note — check if active recipe makes this problem intrinsic
+            var sNote = STRUCTURAL_NOTES[p.id];
+            if (sNote) {
+                var active = tabD_getActiveItems();
+                var aIds = active.map(function(c) { return c.id; });
+                var aFams = []; active.forEach(function(c) { if (aFams.indexOf(c.fam) === -1) aFams.push(c.fam); });
+                if (active.length > 0 && sNote.check(aIds, aFams)) {
+                    bodyHTML += '<div class="td-structural-note">' + sNote.text + '</div>';
+                }
+            }
 
             if (p.condizioni && p.condizioni.length > 0) {
                 bodyHTML += '<div class="td-pc-section"><div class="td-tag-row">' + p.condizioni.map(function(c) { return '<span class="td-tag td-risk">' + c + '</span>'; }).join('') + '</div></div>';
